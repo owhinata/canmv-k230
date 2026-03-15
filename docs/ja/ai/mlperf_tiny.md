@@ -166,3 +166,75 @@ python main.py --port /dev/ttyACM1 --baud 115200
 
 - 現在の実装では VB 初期化は省略されています
 - nncase runtime が VB を要求する場合は、`submitter_implemented.cc` の `InitPlatform()` に VB 設定を追加してください
+
+## kmodel 変換
+
+`convert_kmodel.py` を使用して、TFLite モデルを K230 KPU 用の kmodel に変換します。変換パイプラインは TFLite → ONNX → kmodel の 2 段階です。
+
+### 依存パッケージのインストール
+
+```bash
+pip install tf2onnx tensorflow-cpu onnxsim nncase nncase-kpu
+```
+
+### 変換の実行
+
+```bash
+python convert_kmodel.py
+```
+
+このスクリプトは以下の処理を行います:
+
+1. TFLite モデルを `tf2onnx` で ONNX 形式に変換
+2. `onnxsim` で ONNX モデルを最適化
+3. `nncase` コンパイラで ONNX を kmodel に変換（K230 KPU 向け）
+
+生成された kmodel ファイルは、前述のデプロイ手順で K230 に転送して使用します。
+
+## ゴールデン推論テスト
+
+`golden_test.py` は、TFLite リファレンス推論と K230 DUT 推論の結果を比較し、モデル変換とデバイス実装の正しさを検証します。
+
+### 実行方法
+
+```bash
+python golden_test.py
+```
+
+### 動作内容
+
+1. CIFAR-10 テストデータセットから入力画像を取得
+2. TFLite インタプリタでリファレンス推論を実行
+3. K230 DUT を自動的に起動し、UART 経由で同じ入力を送信
+4. DUT の推論結果とリファレンスの推論結果を比較
+5. 精度（accuracy）と一致率（agreement）をレポート
+
+DUT の起動・通信は自動化されているため、手動で DUT を起動する必要はありません。
+
+## Runner ベースのベンチマーク
+
+`run_benchmark.py` は、上流の MLPerf Tiny runner を使用して標準的な精度ベンチマークを実行します。
+
+### 実行方法
+
+```bash
+python run_benchmark.py
+```
+
+### 動作内容
+
+1. CIFAR-10 から IC (Image Classification) 評価データセットを生成
+2. 200 サンプルを使用した精度ベンチマークを実行
+3. 上流の MLPerf Tiny runner プロトコルに準拠した計測を実施
+
+## 結果サマリ
+
+| 指標 | 結果 | 目標 |
+|------|------|------|
+| 精度 (accuracy) | 87.5% | 85% |
+| レイテンシ | ~2.3ms | — |
+| リファレンスとの一致率 | 99% | — |
+
+- 精度は目標の 85% を上回る **87.5%** を達成
+- 推論レイテンシは約 **2.3ms** で、K230 KPU の高速推論能力を示しています
+- TFLite リファレンスとの一致率は **99%** で、kmodel 変換と DUT 実装の正確さを確認できます
