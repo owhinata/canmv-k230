@@ -16,7 +16,7 @@ Usage:
     .venv/bin/python apps/mlperf_tiny/scripts/golden_test.py -n 50 --port /dev/ttyACM1
 
 Prerequisites:
-    pip install -r apps/mlperf_tiny/scripts/requirements.txt
+    pip install -r requirements.txt
 """
 
 import argparse

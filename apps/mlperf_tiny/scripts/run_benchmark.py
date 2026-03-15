@@ -12,7 +12,7 @@ Usage:
     .venv/bin/python apps/mlperf_tiny/scripts/run_benchmark.py --mode a  # accuracy
 
 Prerequisites:
-    pip install -r apps/mlperf_tiny/scripts/requirements.txt
+    pip install -r requirements.txt
     DUT deployed: cmake --build build/mlperf_tiny --target deploy
 """
 

@@ -15,9 +15,12 @@ set(MLPERF_BENCHMARK "ic" CACHE STRING "Benchmark: ic")
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 set(_VENV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../.venv)
 set(_VENV_PYTHON ${_VENV_DIR}/bin/python)
+set(_REQUIREMENTS ${CMAKE_CURRENT_SOURCE_DIR}/../../requirements.txt)
 set(_KMODEL_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/model.kmodel)
 
 add_custom_target(kmodel
+    COMMAND ${Python3_EXECUTABLE} -m venv ${_VENV_DIR}
+    COMMAND ${_VENV_PYTHON} -m pip install -r ${_REQUIREMENTS} --quiet
     COMMAND ${_VENV_PYTHON}
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/convert_kmodel.py
             -o ${_KMODEL_OUTPUT}
