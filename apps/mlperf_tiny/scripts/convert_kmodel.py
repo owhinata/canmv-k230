@@ -97,9 +97,11 @@ def onnx_to_kmodel(onnx_path, kmodel_path):
     ptq_options.export_quant_scheme = False
     ptq_options.export_weight_range_by_channel = False
 
-    # Random calibration data (float32, matching model input range)
+    # Random calibration data (float32 [0,255], matching model input range)
     samples = [
-        np.random.rand(1, INPUT_H, INPUT_W, INPUT_C).astype(np.float32)
+        np.random.randint(0, 256, (1, INPUT_H, INPUT_W, INPUT_C)).astype(
+            np.float32
+        )
         for _ in range(5)
     ]
     ptq_options.samples_count = len(samples)
