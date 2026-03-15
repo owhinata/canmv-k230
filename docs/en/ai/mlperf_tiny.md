@@ -2,240 +2,148 @@
 
 A DUT (Device Under Test) implementation for measuring K230 KPU inference performance using the [MLPerf Tiny](https://github.com/mlcommons/tiny) benchmark framework.
 
-Currently supports **Image Classification (CIFAR-10, ResNet-8)**.
+Supports **IC (Image Classification), VWW (Visual Wake Words), KWS (Keyword Spotting), and AD (Anomaly Detection)** — all four MLPerf Tiny benchmarks. A single binary + per-benchmark kmodel files runs all workloads.
 
 !!! note "K230 and MLPerf Tiny"
     MLPerf Tiny typically targets 10-250MHz / <50mW class MCUs. The K230 falls outside this category, but by implementing a DUT conforming to the submitter API, we can reuse the standard measurement procedures provided by the official harness.
 
+## Supported Benchmarks
+
+| ID | Task | Model | Input Size | Output | Quality Target |
+|----|------|-------|-----------|--------|---------------|
+| ic01 | Image Classification | ResNet-8 | 32×32×3 = 3,072 | 10 classes | 85% |
+| vww01 | Visual Wake Words | MobileNetV1 | 96×96×3 = 27,648 | 2 classes | 80% |
+| kws01 | Keyword Spotting | DS-CNN | 49×10×1 = 490 | 12 classes | 90% |
+| ad01 | Anomaly Detection | AutoEncoder | 1×640 | 640 (reconstruction) | AUC 0.85 |
+
 ## Prerequisites
 
-- K230 SDK must be built (toolchain extracted, MPP libraries compiled)
+- K230 SDK built (toolchain extracted, MPP libraries compiled)
 - SDK placed at `k230_sdk/` in the repository root
 - CMake 3.16 or later
-- UART connection (115200 bps) — for communication with the MLPerf Tiny legacy harness
+- UART connection (115200 bps) — for MLPerf Tiny legacy harness communication
 
 !!! note "Building the SDK"
-    For K230 SDK build instructions, see [SDK Build](../development/sdk_build.md).
+    See [SDK Build](../development/sdk_build.md) for K230 SDK build instructions.
 
-## Overall Workflow
+## Build
 
-```
-[Host PC]                         [K230 DUT]
-                                    |
-1. git submodule update             |
-2. cmake configure/build            |
-3. deploy (SCP)                     |
-                                    |
-4. Start DUT (UART)          -->  main loop
-                                    |
-5. runner (Python)           -->  UART command processing
-   name%                      <--  m-name-dut-[...]
-   db load N%                 <--  m-[Expecting N bytes]
-   db HEXDATA%                <--  m-load-done
-   infer N W%                 <--  m-results-[...]
-   results%                   <--  m-results-[...]
-```
-
-## Build Instructions
-
-### 1. Fetch submodule
+### 1. Get submodules
 
 ```bash
 git submodule update --init mlperf_tiny
 ```
 
-### 2. Configure
+### 2. Configure and build
 
 ```bash
 cmake -B build/mlperf_tiny -S apps/mlperf_tiny \
   -DCMAKE_TOOLCHAIN_FILE="$(pwd)/cmake/toolchain-k230-rtsmart.cmake"
-```
-
-### 3. Build
-
-```bash
 cmake --build build/mlperf_tiny
 ```
 
-### 4. Verify
+### 3. Convert kmodels
+
+Convert all benchmark kmodels:
 
 ```bash
-file build/mlperf_tiny/mlperf_tiny
+cmake --build build/mlperf_tiny --target kmodel
 ```
 
-Expected output:
+Or individual benchmarks:
 
+```bash
+.venv/bin/python apps/mlperf_tiny/scripts/convert_kmodel.py --benchmark ic01
+.venv/bin/python apps/mlperf_tiny/scripts/convert_kmodel.py --benchmark ic01 vww01 kws01 ad01
 ```
-mlperf_tiny: ELF 64-bit LSB executable, UCB RISC-V, ...
-```
 
-## Deploying and Running on K230
+### 4. Deploy
 
-### deploy target
-
-Build, convert kmodel, and transfer in one step:
+Transfer binary + all kmodels to K230:
 
 ```bash
 cmake --build build/mlperf_tiny --target deploy
 ```
 
-The deploy target depends on the kmodel target (`convert_kmodel.py` TFLite → kmodel conversion), so the kmodel is automatically generated if not yet present.
+## Running on K230
 
-### Manual transfer
+```
+/sharefs/mlperf_tiny/
+  mlperf_tiny          # universal binary
+  ic01.kmodel
+  vww01.kmodel
+  kws01.kmodel
+  ad01.kmodel
+```
+
+```
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/ic01.kmodel
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/vww01.kmodel
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/ad01.kmodel
+```
+
+Model version is auto-detected from the kmodel filename.
+
+## Testing (ctest)
 
 ```bash
-scp build/mlperf_tiny/mlperf_tiny root@<K230_IP>:/sharefs/mlperf_tiny/
-scp /path/to/model.kmodel root@<K230_IP>:/sharefs/mlperf_tiny/model.kmodel
+ctest --test-dir build/mlperf_tiny -R ic01$         # IC benchmark only
+ctest --test-dir build/mlperf_tiny -R ic01_golden   # IC golden test only
+ctest --test-dir build/mlperf_tiny -R golden        # all golden tests
+ctest --test-dir build/mlperf_tiny                  # all tests
 ```
 
-### Running on K230 bigcore (msh)
+## Golden Tests
 
-```
-msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/model.kmodel
-```
-
-Expected output on successful startup:
-
-```
-m-timestamp-mode-performance
-m-lap-us-XXXXXXXX
-m-init-done
-m-ready
-```
-
-## Manual UART Command Testing
-
-Connect to the bigcore serial port (`/dev/ttyACM1`, 115200 bps) using minicom or similar, and send the following commands (each terminated with `%`):
-
-| Command | Description | Expected Response |
-|---------|-------------|-------------------|
-| `name%` | Show device name | `m-name-dut-[unspecified]` |
-| `profile%` | Show profile | `m-profile-[...]` / `m-model-[ic01]` |
-| `help%` | Show help | Command list |
-| `db load 3072%` | Allocate input buffer (32x32x3) | `m-[Expecting 3072 bytes]` |
-| `infer 1 0%` | Run 1 inference (0 warmup) | `m-results-[...]` |
-| `results%` | Show last results | `m-results-[...]` |
-
-## Runner-based Measurement
-
-Use the MLPerf Tiny Python runner for automated measurement:
+`golden_test.py` compares TFLite reference inference against K230 DUT inference on the same input data.
 
 ```bash
-cd mlperf_tiny/benchmark/runner
-python main.py --port /dev/ttyACM1 --baud 115200
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark ic01 -n 100
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark vww01 -n 10
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark kws01 -n 10
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark ad01 -n 10
 ```
 
-!!! warning "Runner requirements"
-    The runner is part of the legacy UART harness. MLCommons is transitioning to a new runner, so procedures may change in future versions.
+## Runner Benchmarks
 
-## CMake Targets
+`run_benchmark.py` runs standard benchmarks using the upstream MLPerf Tiny runner.
 
-| Target | Command | Description |
-|--------|---------|-------------|
-| (default) | `cmake --build build/mlperf_tiny` | Build C++ binary |
-| `deploy` | `cmake --build build/mlperf_tiny --target deploy` | Build + SCP transfer to K230 |
-| `run` | `cmake --build build/mlperf_tiny --target run` | Execute on K230 via serial |
+```bash
+.venv/bin/python apps/mlperf_tiny/scripts/run_benchmark.py --benchmark ic01
+.venv/bin/python apps/mlperf_tiny/scripts/run_benchmark.py --benchmark vww01 --mode p
+```
 
-## CMake Options
+## Datasets
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `MLPERF_BENCHMARK` | `ic` | Benchmark type |
-| `MLPERF_KMODEL` | `build/.../model.kmodel` | Path to kmodel file for deployment (auto-generated by kmodel target) |
+Evaluation datasets are automatically downloaded and cached:
+
+| Benchmark | Source | Cache | Samples |
+|-----------|--------|-------|---------|
+| ic01 | CIFAR-10 (Keras) | `~/.keras/datasets/` | 200 |
+| vww01 | COCO2014 96×96 (Silicon Labs) | `~/.mlperf/vww/` | 1,000 |
+| kws01 | Speech Commands v2 (tfds) | `~/.mlperf/kws/` | 1,000 |
+| ad01 | ToyADMOS/ToyCar (Zenodo) | `~/.mlperf/ad/` | 248 |
+
+## Results Summary
+
+| Benchmark | Accuracy | Target | Latency | kmodel |
+|-----------|----------|--------|---------|--------|
+| IC (ic01) | 87.5% | 85% | ~2.4 ms | 88 KB |
+| VWW (vww01) | — | 80% | ~2.7 ms | 286 KB |
+| KWS (kws01) | — | 90% | ~2.4 ms | 39 KB |
+| AD (ad01) | — | AUC 0.85 | ~2.5 ms | 315 KB |
+
+- IC exceeds the 85% quality target with **87.5%** accuracy
+- All benchmarks achieve **2.4–2.7 ms** latency, stable regardless of input size
+- VWW/KWS/AD accuracy requires full evaluation dataset runs
 
 ## Source Files
 
 | File | Description |
 |------|-------------|
-| `src/main.cc` | Entry point — kmodel path argument, UART main loop |
-| `src/submitter_implemented.cc` | K230/nncase implementation of th_* functions |
-
-## Troubleshooting
-
-### UART Communication Failure
-
-- Verify baud rate is 115200 bps
-- Verify using the bigcore serial port (`/dev/ttyACM1`)
-- Ensure minicom/picocom is not occupying the port
-
-### kmodel Load Failure
-
-- Verify the kmodel file path is correct
-- Check nncase version compatibility with the kmodel
-
-### VB Initialization Failure
-
-- The current implementation omits VB initialization
-- If the nncase runtime requires VB, add VB configuration to `InitPlatform()` in `submitter_implemented.cc`
-
-## kmodel Conversion
-
-Use `convert_kmodel.py` to convert a TFLite model to a kmodel for the K230 KPU. The conversion pipeline is a two-stage process: TFLite → ONNX → kmodel.
-
-### Install dependencies
-
-```bash
-pip install tf2onnx tensorflow-cpu onnxsim nncase nncase-kpu
-```
-
-### Run conversion
-
-```bash
-python convert_kmodel.py
-```
-
-This script performs the following steps:
-
-1. Converts the TFLite model to ONNX format using `tf2onnx`
-2. Optimizes the ONNX model with `onnxsim`
-3. Compiles the ONNX model to kmodel using the `nncase` compiler (targeting K230 KPU)
-
-The generated kmodel file can be deployed to the K230 using the deploy procedure described above.
-
-## Golden Inference Test
-
-`golden_test.py` compares TFLite reference inference results against K230 DUT inference results to verify the correctness of model conversion and device implementation.
-
-### Usage
-
-```bash
-python golden_test.py
-```
-
-### How it works
-
-1. Retrieves input images from the CIFAR-10 test dataset
-2. Runs reference inference using the TFLite interpreter
-3. Automatically launches the K230 DUT and sends the same inputs via UART
-4. Compares DUT inference results against reference results
-5. Reports accuracy and agreement metrics
-
-The DUT launch and communication are fully automated — no manual DUT startup is required.
-
-## Runner-based Benchmark
-
-`run_benchmark.py` runs a standard accuracy benchmark using the upstream MLPerf Tiny runner.
-
-### Usage
-
-```bash
-python run_benchmark.py
-```
-
-### How it works
-
-1. Generates an IC (Image Classification) evaluation dataset from CIFAR-10
-2. Runs a 200-sample accuracy benchmark
-3. Performs measurement conforming to the upstream MLPerf Tiny runner protocol
-
-## Results Summary
-
-| Metric | Result | Target |
-|--------|--------|--------|
-| Accuracy | 87.5% | 85% |
-| Latency | ~2.3ms | — |
-| Agreement with reference | 99% | — |
-
-- Accuracy achieved **87.5%**, exceeding the 85% target
-- Inference latency of approximately **2.3ms** demonstrates the K230 KPU's high-speed inference capability
-- **99%** agreement with the TFLite reference confirms the correctness of the kmodel conversion and DUT implementation
+| `src/main.cc` | Entry point — kmodel path, model_version args, UART main loop |
+| `src/submitter_implemented.cc` | th_* function implementation for K230/nncase (all benchmarks) |
+| `src/internally_implemented.cpp` | Copied from submodule, TH_MODEL_VERSION made runtime |
+| `scripts/convert_kmodel.py` | TFLite → kmodel conversion (all benchmarks) |
+| `scripts/run_benchmark.py` | Runner-based benchmark execution |
+| `scripts/golden_test.py` | TFLite vs DUT golden comparison test |

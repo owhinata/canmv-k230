@@ -2,10 +2,19 @@
 
 K230 KPU の推論性能を [MLPerf Tiny](https://github.com/mlcommons/tiny) ベンチマークフレームワークで計測するための DUT (Device Under Test) 実装です。
 
-現在は **Image Classification (CIFAR-10, ResNet-8)** に対応しています。
+**IC (Image Classification)、VWW (Visual Wake Words)、KWS (Keyword Spotting)、AD (Anomaly Detection)** の 4 ベンチマークに対応しています。1 つのバイナリ + ベンチマーク別 kmodel で全ワークロードを実行可能です。
 
 !!! note "K230 と MLPerf Tiny の位置づけ"
     MLPerf Tiny は 10-250MHz / <50mW 級の MCU を典型的な対象としています。K230 はこのカテゴリからは外れますが、submitter API に準拠した DUT を実装することで、公式 harness による標準的な計測手順を再利用できます。
+
+## 対応ベンチマーク
+
+| ID | タスク | モデル | 入力サイズ | 出力 | 精度目標 |
+|----|--------|--------|-----------|------|---------|
+| ic01 | Image Classification | ResNet-8 | 32×32×3 = 3,072 | 10 classes | 85% |
+| vww01 | Visual Wake Words | MobileNetV1 | 96×96×3 = 27,648 | 2 classes | 80% |
+| kws01 | Keyword Spotting | DS-CNN | 49×10×1 = 490 | 12 classes | 90% |
+| ad01 | Anomaly Detection | AutoEncoder | 1×640 | 640 (再構成) | AUC 0.85 |
 
 ## 前提条件
 
@@ -24,16 +33,15 @@ K230 KPU の推論性能を [MLPerf Tiny](https://github.com/mlcommons/tiny) ベ
                                     │
 1. git submodule update             │
 2. cmake configure/build            │
-3. deploy (SCP)                     │
+3. deploy (binary + kmodels)        │
                                     │
-4. DUT 起動 (UART)          ──→  main loop
+4. DUT 起動 (UART)          ──→  main loop (auto-detect benchmark)
                                     │
-5. runner (Python)           ──→  UART コマンド処理
+5. runner / golden_test     ──→  UART コマンド処理
    name%                      ←──  m-name-dut-[...]
    db load N%                 ←──  m-[Expecting N bytes]
    db HEXDATA%                ←──  m-load-done
    infer N W%                 ←──  m-results-[...]
-   results%                   ←──  m-results-[...]
 ```
 
 ## ビルド手順
@@ -44,111 +52,127 @@ K230 KPU の推論性能を [MLPerf Tiny](https://github.com/mlcommons/tiny) ベ
 git submodule update --init mlperf_tiny
 ```
 
-### 2. 設定
+### 2. 設定・ビルド
 
 ```bash
 cmake -B build/mlperf_tiny -S apps/mlperf_tiny \
   -DCMAKE_TOOLCHAIN_FILE="$(pwd)/cmake/toolchain-k230-rtsmart.cmake"
-```
-
-### 3. ビルド
-
-```bash
 cmake --build build/mlperf_tiny
 ```
 
-### 4. 確認
+### 3. kmodel 変換
+
+全ベンチマークの kmodel を一括生成:
 
 ```bash
-file build/mlperf_tiny/mlperf_tiny
+cmake --build build/mlperf_tiny --target kmodel
 ```
 
-期待される出力:
+個別に変換する場合:
 
+```bash
+.venv/bin/python apps/mlperf_tiny/scripts/convert_kmodel.py --benchmark ic01
+.venv/bin/python apps/mlperf_tiny/scripts/convert_kmodel.py --benchmark ic01 vww01 kws01 ad01
 ```
-mlperf_tiny: ELF 64-bit LSB executable, UCB RISC-V, ...
-```
 
-## K230 への転送・実行
+### 4. デプロイ
 
-### deploy ターゲット
-
-kmodel 変換・ビルド・転送をまとめて実行します:
+バイナリ + 全 kmodel を K230 に転送:
 
 ```bash
 cmake --build build/mlperf_tiny --target deploy
 ```
 
-deploy は kmodel ターゲット（`convert_kmodel.py` による TFLite → kmodel 変換）に依存しているため、kmodel が未生成の場合は自動的に変換されます。
+## K230 上の配置と実行
 
-### 手動で転送する場合
+```
+/sharefs/mlperf_tiny/
+  mlperf_tiny          # 共通バイナリ
+  ic01.kmodel
+  vww01.kmodel
+  kws01.kmodel
+  ad01.kmodel
+```
+
+### 実行
+
+```
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/ic01.kmodel
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/vww01.kmodel
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/ad01.kmodel
+```
+
+model_version は kmodel ファイル名から自動検出されます。明示指定も可能:
+
+```
+msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/ad01.kmodel ad01
+```
+
+## テスト (ctest)
 
 ```bash
-scp build/mlperf_tiny/mlperf_tiny root@<K230_IP>:/sharefs/mlperf_tiny/
-scp /path/to/model.kmodel root@<K230_IP>:/sharefs/mlperf_tiny/model.kmodel
+ctest --test-dir build/mlperf_tiny -R ic01$         # IC benchmark のみ
+ctest --test-dir build/mlperf_tiny -R ic01_golden   # IC golden test のみ
+ctest --test-dir build/mlperf_tiny -R ic01          # IC benchmark + golden
+ctest --test-dir build/mlperf_tiny -E golden        # 全ベンチマーク benchmark（golden 除外）
+ctest --test-dir build/mlperf_tiny -R golden        # 全ベンチマーク golden test
+ctest --test-dir build/mlperf_tiny                  # 全テスト
 ```
 
-### K230 bigcore (msh) で実行
+## ゴールデン推論テスト
 
-```
-msh /> /sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/model.kmodel
-```
-
-起動成功時の出力:
-
-```
-m-timestamp-mode-performance
-m-lap-us-XXXXXXXX
-m-init-done
-m-ready
-```
-
-## UART コマンド手動テスト
-
-minicom 等で bigcore シリアル (`/dev/ttyACM1`, 115200 bps) に接続し、以下のコマンドを送信できます（各コマンドは `%` で終端）:
-
-| コマンド | 説明 | 期待される応答 |
-|---------|------|--------------|
-| `name%` | デバイス名表示 | `m-name-dut-[unspecified]` |
-| `profile%` | プロファイル表示 | `m-profile-[...]` / `m-model-[ic01]` |
-| `help%` | ヘルプ表示 | コマンド一覧 |
-| `db load 3072%` | 入力バッファ確保 (32×32×3) | `m-[Expecting 3072 bytes]` |
-| `infer 1 0%` | 推論 1 回（warmup 0） | `m-results-[...]` |
-| `results%` | 最終結果再表示 | `m-results-[...]` |
-
-## Runner による計測
-
-MLPerf Tiny の Python runner を使用して自動計測を行います:
+`golden_test.py` は、TFLite リファレンス推論と K230 DUT 推論の結果を比較し、モデル変換とデバイス実装の正しさを検証します。
 
 ```bash
-cd mlperf_tiny/benchmark/runner
-python main.py --port /dev/ttyACM1 --baud 115200
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark ic01 -n 100
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark vww01 -n 10
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark kws01 -n 10
+.venv/bin/python apps/mlperf_tiny/scripts/golden_test.py --benchmark ad01 -n 10
 ```
 
-!!! warning "runner の動作要件"
-    runner は legacy UART harness の一部です。MLCommons は新 runner への移行を進めているため、将来バージョンでは手順が変わる可能性があります。
+## Runner ベースのベンチマーク
 
-## CMake ターゲット
+`run_benchmark.py` は、上流の MLPerf Tiny runner を使用して標準的なベンチマークを実行します。
 
-| ターゲット | コマンド | 説明 |
-|-----------|---------|------|
-| (デフォルト) | `cmake --build build/mlperf_tiny` | C++ バイナリのビルド |
-| `deploy` | `cmake --build build/mlperf_tiny --target deploy` | ビルド + K230 への SCP 転送 |
-| `run` | `cmake --build build/mlperf_tiny --target run` | シリアル経由で K230 実行 |
+```bash
+.venv/bin/python apps/mlperf_tiny/scripts/run_benchmark.py --benchmark ic01
+.venv/bin/python apps/mlperf_tiny/scripts/run_benchmark.py --benchmark vww01 --mode p
+```
 
-## CMake オプション
+## データセット
 
-| 変数 | デフォルト | 説明 |
-|------|-----------|------|
-| `MLPERF_BENCHMARK` | `ic` | ベンチマーク種別 |
-| `MLPERF_KMODEL` | `build/.../model.kmodel` | デプロイする kmodel のパス（kmodel ターゲットで自動生成） |
+評価データセットは自動ダウンロード・キャッシュされます:
+
+| ベンチマーク | ソース | キャッシュ | サンプル数 |
+|------------|--------|-----------|-----------|
+| ic01 | CIFAR-10 (Keras) | `~/.keras/datasets/` | 200 |
+| vww01 | COCO2014 96×96 (Silicon Labs) | `~/.mlperf/vww/` | 1,000 |
+| kws01 | Speech Commands v2 (tfds) | `~/.mlperf/kws/` | 1,000 |
+| ad01 | ToyADMOS/ToyCar (Zenodo) | `~/.mlperf/ad/` | 248 |
+
+## 結果サマリ
+
+| ベンチマーク | 精度 | 目標 | レイテンシ | kmodel |
+|------------|------|------|-----------|--------|
+| IC (ic01) | 87.5% | 85% | ~2.4 ms | 88 KB |
+| VWW (vww01) | — | 80% | ~2.7 ms | 286 KB |
+| KWS (kws01) | — | 90% | ~2.4 ms | 39 KB |
+| AD (ad01) | — | AUC 0.85 | ~2.5 ms | 315 KB |
+
+- IC は目標の 85% を上回る **87.5%** を達成
+- 全ベンチマークのレイテンシは **2.4〜2.7 ms** で、入力サイズに依らず安定
+- VWW/KWS/AD の精度は runner による評価データセット全体での計測が必要
 
 ## ソースファイル
 
 | ファイル | 説明 |
 |---------|------|
-| `src/main.cc` | エントリポイント — kmodel パス引数、UART メインループ |
-| `src/submitter_implemented.cc` | th_* 関数の K230/nncase 実装 |
+| `src/main.cc` | エントリポイント — kmodel パス・model_version 引数、UART メインループ |
+| `src/submitter_implemented.cc` | th_* 関数の K230/nncase 実装（全ベンチマーク共通） |
+| `src/internally_implemented.cpp` | submodule からコピー、TH_MODEL_VERSION をランタイム変数化 |
+| `scripts/convert_kmodel.py` | TFLite → kmodel 変換（全ベンチマーク対応） |
+| `scripts/run_benchmark.py` | Runner ベースのベンチマーク実行 |
+| `scripts/golden_test.py` | TFLite vs DUT ゴールデンテスト |
 
 ## トラブルシューティング
 
@@ -163,79 +187,6 @@ python main.py --port /dev/ttyACM1 --baud 115200
 - kmodel ファイルのパスが正しいことを確認
 - nncase のバージョンと kmodel の互換性を確認
 
-### VB 初期化失敗
+### VWW のデータ転送が遅い
 
-- 現在の実装では VB 初期化は省略されています
-- nncase runtime が VB を要求する場合は、`submitter_implemented.cc` の `InitPlatform()` に VB 設定を追加してください
-
-## kmodel 変換
-
-`convert_kmodel.py` を使用して、TFLite モデルを K230 KPU 用の kmodel に変換します。変換パイプラインは TFLite → ONNX → kmodel の 2 段階です。
-
-### 依存パッケージのインストール
-
-```bash
-pip install tf2onnx tensorflow-cpu onnxsim nncase nncase-kpu
-```
-
-### 変換の実行
-
-```bash
-python convert_kmodel.py
-```
-
-このスクリプトは以下の処理を行います:
-
-1. TFLite モデルを `tf2onnx` で ONNX 形式に変換
-2. `onnxsim` で ONNX モデルを最適化
-3. `nncase` コンパイラで ONNX を kmodel に変換（K230 KPU 向け）
-
-生成された kmodel ファイルは、前述のデプロイ手順で K230 に転送して使用します。
-
-## ゴールデン推論テスト
-
-`golden_test.py` は、TFLite リファレンス推論と K230 DUT 推論の結果を比較し、モデル変換とデバイス実装の正しさを検証します。
-
-### 実行方法
-
-```bash
-python golden_test.py
-```
-
-### 動作内容
-
-1. CIFAR-10 テストデータセットから入力画像を取得
-2. TFLite インタプリタでリファレンス推論を実行
-3. K230 DUT を自動的に起動し、UART 経由で同じ入力を送信
-4. DUT の推論結果とリファレンスの推論結果を比較
-5. 精度（accuracy）と一致率（agreement）をレポート
-
-DUT の起動・通信は自動化されているため、手動で DUT を起動する必要はありません。
-
-## Runner ベースのベンチマーク
-
-`run_benchmark.py` は、上流の MLPerf Tiny runner を使用して標準的な精度ベンチマークを実行します。
-
-### 実行方法
-
-```bash
-python run_benchmark.py
-```
-
-### 動作内容
-
-1. CIFAR-10 から IC (Image Classification) 評価データセットを生成
-2. 200 サンプルを使用した精度ベンチマークを実行
-3. 上流の MLPerf Tiny runner プロトコルに準拠した計測を実施
-
-## 結果サマリ
-
-| 指標 | 結果 | 目標 |
-|------|------|------|
-| 精度 (accuracy) | 87.5% | 85% |
-| レイテンシ | ~2.3ms | — |
-| リファレンスとの一致率 | 99% | — |
-
-- 精度は目標の 85% を上回る **87.5%** を達成
-- 推論レイテンシは約 **2.3ms** で、K230 KPU の高速推論能力を示しています
-- TFLite リファレンスとの一致率は **99%** で、kmodel 変換と DUT 実装の正確さを確認できます
+VWW は入力サイズが 27,648 bytes と大きく、115200 baud のシリアル転送では 1 サンプルあたり約 30-60 秒かかります。これは UART プロトコルの制約であり、推論自体は ~2.7 ms です。
