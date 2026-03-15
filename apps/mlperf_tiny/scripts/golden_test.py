@@ -1,19 +1,14 @@
-"""Golden inference comparison for MLPerf Tiny Image Classification on K230.
+"""Golden inference comparison for MLPerf Tiny benchmarks on K230.
 
-Loads the reference TFLite model (pretrainedResnet.tflite, float32) and
-CIFAR-10 test samples, runs inference on both the TFLite model and a K230
-DUT connected via serial, then compares the results.
+Loads the reference TFLite model and test samples, runs inference on both the
+TFLite model and a K230 DUT connected via serial, then compares the results.
 
-The TFLite model input is float32 [1, 32, 32, 3] NHWC, range [0, 1].
-The DUT receives uint8 data via the MLPerf Tiny UART protocol and internally
-converts uint8 [0,255] -> float32 [0,1] by dividing by 255.
-
-Both paths receive equivalent input: TFLite gets float32 = uint8 / 255.0,
-and the DUT gets the same uint8 bytes.
+Supports all benchmarks: IC (CIFAR-10), VWW, KWS, AD.
 
 Usage:
-    .venv/bin/python apps/mlperf_tiny/scripts/golden_test.py
-    .venv/bin/python apps/mlperf_tiny/scripts/golden_test.py -n 50 --port /dev/ttyACM1
+    .venv/bin/python golden_test.py --benchmark ic01
+    .venv/bin/python golden_test.py --benchmark vww01 -n 50
+    .venv/bin/python golden_test.py --benchmark ad01 --port /dev/ttyACM1
 
 Prerequisites:
     pip install -r requirements.txt
@@ -32,20 +27,59 @@ import serial
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
-TFLITE_PATH = os.path.join(
-    REPO_ROOT,
-    "mlperf_tiny/benchmark/training/image_classification/"
-    "trained_models/pretrainedResnet.tflite",
-)
+TRAINING_DIR = os.path.join(REPO_ROOT, "mlperf_tiny", "benchmark", "training")
 
-CIFAR10_CLASSES = [
-    "airplane", "automobile", "bird", "cat", "deer",
-    "dog", "frog", "horse", "ship", "truck",
-]
+DUT_MAX_HEX_BYTES = 31
 
-INPUT_SIZE = 32 * 32 * 3  # 3072 bytes
-NUM_CLASSES = 10
-DUT_MAX_HEX_BYTES = 31  # max bytes per "db" command (no power manager)
+# Benchmark definitions
+BENCHMARK_CONFIG = {
+    "ic01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "image_classification/trained_models/pretrainedResnet.tflite",
+        ),
+        "input_shape": (32, 32, 3),
+        "output_elements": 10,
+        "task": "classification",
+        "class_names": [
+            "airplane", "automobile", "bird", "cat", "deer",
+            "dog", "frog", "horse", "ship", "truck",
+        ],
+    },
+    "vww01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "visual_wake_words/trained_models/vww_96_float.tflite",
+        ),
+        "input_shape": (96, 96, 3),
+        "output_elements": 2,
+        "task": "classification",
+        "class_names": ["not_person", "person"],
+    },
+    "kws01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "keyword_spotting/trained_models/kws_ref_model_float32.tflite",
+        ),
+        "input_shape": (49, 10, 1),
+        "output_elements": 12,
+        "task": "classification",
+        "class_names": [
+            "silence", "unknown", "yes", "no", "up", "down",
+            "left", "right", "on", "off", "stop", "go",
+        ],
+    },
+    "ad01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "anomaly_detection/trained_models/ad01_fp32.tflite",
+        ),
+        "input_shape": (640,),
+        "output_elements": 640,
+        "task": "regression",
+        "class_names": None,
+    },
+}
 
 
 # ---------------------------------------------------------------------------
@@ -61,44 +95,37 @@ def load_tflite_model(model_path):
     return interpreter
 
 
-def tflite_infer(interpreter, image_uint8):
-    """Run TFLite inference on a single uint8 image.
+def tflite_infer(interpreter, data):
+    """Run TFLite inference on a single input.
 
     Args:
         interpreter: TFLite Interpreter instance.
-        image_uint8: numpy array of shape (32, 32, 3), dtype uint8.
+        data: numpy array (uint8 for classification, float32 for AD).
 
     Returns:
-        numpy array of shape (10,), the output probabilities/logits.
+        numpy array of output values.
     """
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
 
-    # The reference model expects raw uint8 values cast to float32 [0,255]
-    image_float = image_uint8.astype(np.float32)
-    input_data = np.expand_dims(image_float, axis=0)  # (1, 32, 32, 3)
+    input_data = np.expand_dims(data.astype(np.float32), axis=0)
 
     interpreter.set_tensor(input_details[0]["index"], input_data)
     interpreter.invoke()
 
     output = interpreter.get_tensor(output_details[0]["index"])
-    return output[0]  # shape (10,)
+    return output[0]
 
 
 # ---------------------------------------------------------------------------
-# CIFAR-10 data loading
+# Dataset loading
 # ---------------------------------------------------------------------------
 
-def load_cifar10_test():
-    """Load CIFAR-10 test set. Returns (images, labels).
-
-    images: (10000, 32, 32, 3) uint8
-    labels: (10000,) int
-    """
+def load_dataset_ic01(n):
+    """Load CIFAR-10 test set. Returns (data, labels)."""
     import glob
     import pickle
 
-    # Try Keras cache first (handles various directory layouts)
     keras_dir = os.path.expanduser("~/.keras/datasets")
     candidates = glob.glob(
         os.path.join(keras_dir, "**/test_batch"), recursive=True
@@ -110,12 +137,73 @@ def load_cifar10_test():
             d = pickle.load(f, encoding="bytes")
         images = d[b"data"].reshape(-1, 3, 32, 32).transpose(0, 2, 3, 1)
         labels = np.array(d[b"labels"])
-        return images, labels
+        return images[:n], labels[:n]
 
-    # Fallback: download via Keras
     from tensorflow.keras.datasets import cifar10
     (_, _), (x_test, y_test) = cifar10.load_data()
-    return x_test, y_test.flatten()
+    return x_test[:n], y_test.flatten()[:n]
+
+
+def load_dataset_from_eval_dir(benchmark, n):
+    """Load dataset from evaluation directory (.bin files + y_labels.csv).
+
+    Works for any benchmark that has pre-populated evaluation data.
+    For AD: .bin files are full spectrograms; extracts first sliding window.
+    """
+    eval_dir = os.path.join(
+        REPO_ROOT, "mlperf_tiny", "benchmark", "evaluation", "datasets", benchmark
+    )
+    labels_path = os.path.join(eval_dir, "y_labels.csv")
+    if not os.path.exists(labels_path):
+        print(f"  WARNING: {labels_path} not found, using random data")
+        cfg = BENCHMARK_CONFIG[benchmark]
+        shape = cfg["input_shape"]
+        data = np.random.randint(0, 256, (n,) + shape, dtype=np.uint8)
+        return data, np.zeros(n, dtype=int)
+
+    import csv
+    with open(labels_path) as f:
+        entries = list(csv.reader(f))
+
+    cfg = BENCHMARK_CONFIG[benchmark]
+    shape = cfg["input_shape"]
+    is_ad = cfg["task"] == "regression"
+    data_list = []
+    label_list = []
+    for entry in entries[:n]:
+        bin_name = entry[0].strip()
+        label = int(entry[2].strip())
+        bin_path = os.path.join(eval_dir, bin_name)
+        if not os.path.exists(bin_path):
+            continue
+
+        if is_ad:
+            # AD: .bin is full spectrogram (float32), extract first window
+            # y_labels format: filename,2,label,window_width_bytes,stride_bytes
+            window_width = int(entry[3].strip())  # bytes (e.g. 2560)
+            n_floats = window_width // 4  # 640
+            raw = np.fromfile(bin_path, dtype=np.float32)
+            window = raw[:n_floats]
+            data_list.append(window)
+        else:
+            raw = np.fromfile(bin_path, dtype=np.uint8)
+            data_list.append(raw.reshape(shape))
+        label_list.append(label)
+
+    if not data_list:
+        print(f"  WARNING: No .bin files found in {eval_dir}, using random data")
+        data = np.random.randint(0, 256, (n,) + shape, dtype=np.uint8)
+        return data, np.zeros(n, dtype=int)
+
+    print(f"  Loaded {len(data_list)} samples from {eval_dir}")
+    return np.array(data_list), np.array(label_list)
+
+
+def load_dataset(benchmark, n):
+    """Load dataset for the specified benchmark."""
+    if benchmark == "ic01":
+        return load_dataset_ic01(n)
+    return load_dataset_from_eval_dir(benchmark, n)
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +232,7 @@ class K230DUT:
         self._ser.write(f"{cmd}%\r".encode())
 
     def _read_until_ready(self, timeout=None):
-        """Read lines until 'm-ready' is seen or timeout. Returns list of lines."""
+        """Read lines until 'm-ready' is seen or timeout."""
         if timeout is None:
             timeout = self._timeout
         lines = []
@@ -197,16 +285,10 @@ class K230DUT:
         return lines
 
     def load_data(self, data_uint8):
-        """Load uint8 data into DUT buffer via 'db load' + 'db HH...' commands.
-
-        Args:
-            data_uint8: flat numpy array or bytes of uint8 values.
-        """
+        """Load uint8 data into DUT buffer via 'db load' + 'db HH...' commands."""
         data = bytes(data_uint8)
         self.send_command(f"db load {len(data)}")
 
-        # EE_CMD_SIZE is 80 chars.  "db " = 3 chars, so max hex payload
-        # is 77 chars → 38 bytes.  Each command gets m-ready response.
         chunk_bytes = 38
         i = 0
         while i < len(data):
@@ -220,19 +302,18 @@ class K230DUT:
         return self.send_command(f"infer {n} {warmups}", timeout=timeout)
 
 
-def parse_dut_response(lines):
+def parse_dut_response(lines, output_elements):
     """Parse DUT response lines for results and timestamps.
 
     Returns:
-        results: list of 10 floats, or None if not found.
-        cycles_start: int or None (rdcycle before inference).
-        cycles_end: int or None (rdcycle after inference).
+        results: list of floats, or None if not found.
+        cycles_start: int or None.
+        cycles_end: int or None.
     """
     results = None
     timestamps = []
 
     for line in lines:
-        # m-results-[v0,v1,...,v9]
         match = re.search(r"m-results-\[([^\]]+)\]", line)
         if match:
             try:
@@ -240,7 +321,6 @@ def parse_dut_response(lines):
             except ValueError:
                 pass
 
-        # m-lap-us-XXXX (actually rdcycle counts on K230)
         match = re.search(r"m-lap-us-(\d+)", line)
         if match:
             timestamps.append(int(match.group(1)))
@@ -257,65 +337,70 @@ def parse_dut_response(lines):
 
 def run_golden_test(args):
     """Run golden comparison between TFLite and K230 DUT."""
+    benchmark = args.benchmark
+    cfg = BENCHMARK_CONFIG[benchmark]
+    tflite_path = args.tflite or cfg["tflite"]
+    output_elements = cfg["output_elements"]
+    is_classification = cfg["task"] == "classification"
+    class_names = cfg["class_names"]
+
     # Load TFLite model
-    print(f"Loading TFLite model: {args.tflite}")
-    if not os.path.exists(args.tflite):
-        print(f"ERROR: TFLite model not found: {args.tflite}")
+    print(f"Loading TFLite model: {tflite_path}")
+    if not os.path.exists(tflite_path):
+        print(f"ERROR: TFLite model not found: {tflite_path}")
         print("Run: git submodule update --init mlperf_tiny")
         return 1
-    interpreter = load_tflite_model(args.tflite)
+    interpreter = load_tflite_model(tflite_path)
 
-    # Load CIFAR-10 test data
-    print("Loading CIFAR-10 test set...")
-    x_test, y_test = load_cifar10_test()
-    print(f"  Loaded {len(x_test)} test samples")
-
-    n = min(args.n, len(x_test))
-    print(f"  Using first {n} samples")
+    # Load test data
+    print(f"Loading test data for {benchmark}...")
+    x_test, y_test = load_dataset(benchmark, args.n)
+    n = len(x_test)
+    print(f"  Using {n} samples")
 
     # Connect to DUT and launch
     print(f"Connecting to DUT: {args.port} @ {args.baud}")
     dut = K230DUT(args.port, args.baud, timeout=args.timeout)
 
-    dut_cmd = "/sharefs/mlperf_tiny/mlperf_tiny /sharefs/mlperf_tiny/model.kmodel"
+    kmodel_path = f"/sharefs/mlperf_tiny/{benchmark}.kmodel"
+    dut_cmd = f"/sharefs/mlperf_tiny/mlperf_tiny {kmodel_path}"
     try:
         print(f"Launching DUT: {dut_cmd}")
         dut.launch_dut(dut_cmd)
 
-        # Tracking
         tflite_correct = 0
         dut_correct = 0
         agree_count = 0
         dut_latencies = []
 
-        print(f"\n{'idx':>5}  {'label':>10}  {'tflite':>10}  {'dut':>10}  "
-              f"{'match':>5}  {'cycles':>12}")
-        print("-" * 65)
+        if is_classification:
+            print(f"\n{'idx':>5}  {'label':>10}  {'tflite':>10}  {'dut':>10}  "
+                  f"{'match':>5}  {'cycles':>12}")
+            print("-" * 65)
+        else:
+            print(f"\n{'idx':>5}  {'mse':>12}  {'cycles':>12}")
+            print("-" * 35)
 
         for i in range(n):
-            image_uint8 = x_test[i]  # (32, 32, 3) uint8
+            sample = x_test[i]
             label = int(y_test[i])
 
             # --- TFLite inference ---
-            tflite_out = tflite_infer(interpreter, image_uint8)
-            tflite_class = int(np.argmax(tflite_out))
+            tflite_out = tflite_infer(interpreter, sample)
 
             # --- DUT inference ---
-            # Flatten to C-contiguous uint8 bytes (NHWC, row-major)
-            data_flat = image_uint8.flatten().astype(np.uint8)
+            if is_classification:
+                # Quantized input: send as uint8 bytes
+                data_flat = sample.flatten().astype(np.uint8)
+            else:
+                # Float32 input (AD): send raw float32 bytes
+                data_flat = sample.flatten().astype(np.float32).tobytes()
             dut.load_data(data_flat)
             dut_lines = dut.infer(n=1, warmups=0, timeout=args.timeout)
 
-            dut_results, cyc_start, cyc_end = parse_dut_response(dut_lines)
-
-            if dut_results is not None and len(dut_results) == NUM_CLASSES:
-                dut_class = int(np.argmax(dut_results))
-            else:
-                dut_class = -1
-                print(f"  WARNING: sample {i} - failed to parse DUT results")
-                if dut_lines:
-                    for line in dut_lines:
-                        print(f"    DUT> {line}")
+            dut_results, cyc_start, cyc_end = parse_dut_response(
+                dut_lines, output_elements
+            )
 
             # --- Latency ---
             cycles = None
@@ -323,37 +408,65 @@ def run_golden_test(args):
                 cycles = cyc_end - cyc_start
                 dut_latencies.append(cycles)
 
-            # --- Comparison ---
-            tflite_ok = tflite_class == label
-            dut_ok = dut_class == label
-            agreed = tflite_class == dut_class
-
-            if tflite_ok:
-                tflite_correct += 1
-            if dut_ok:
-                dut_correct += 1
-            if agreed:
-                agree_count += 1
-
             cycles_str = f"{cycles:>12,}" if cycles is not None else "         N/A"
-            match_str = "Y" if agreed else "N"
 
-            print(f"{i:>5}  {CIFAR10_CLASSES[label]:>10}  "
-                  f"{CIFAR10_CLASSES[tflite_class]:>10}  "
-                  f"{CIFAR10_CLASSES[dut_class] if dut_class >= 0 else 'ERR':>10}  "
-                  f"{match_str:>5}  {cycles_str}")
+            if is_classification:
+                tflite_class = int(np.argmax(tflite_out))
+
+                if dut_results is not None and len(dut_results) == output_elements:
+                    dut_class = int(np.argmax(dut_results))
+                else:
+                    dut_class = -1
+                    print(f"  WARNING: sample {i} - failed to parse DUT results")
+                    if dut_lines:
+                        for line in dut_lines:
+                            print(f"    DUT> {line}")
+
+                tflite_ok = tflite_class == label
+                dut_ok = dut_class == label
+                agreed = tflite_class == dut_class
+
+                if tflite_ok:
+                    tflite_correct += 1
+                if dut_ok:
+                    dut_correct += 1
+                if agreed:
+                    agree_count += 1
+
+                match_str = "Y" if agreed else "N"
+                tflite_name = class_names[tflite_class] if class_names else str(tflite_class)
+                dut_name = class_names[dut_class] if class_names and dut_class >= 0 else "ERR"
+                label_name = class_names[label] if class_names else str(label)
+
+                print(f"{i:>5}  {label_name:>10}  {tflite_name:>10}  "
+                      f"{dut_name:>10}  {match_str:>5}  {cycles_str}")
+            else:
+                # Regression (AD): compare MSE
+                if dut_results is not None and len(dut_results) == output_elements:
+                    dut_arr = np.array(dut_results)
+                    mse = float(np.mean((tflite_out - dut_arr) ** 2))
+                    agree_count += 1
+                else:
+                    mse = float("nan")
+                    print(f"  WARNING: sample {i} - failed to parse DUT results")
+
+                print(f"{i:>5}  {mse:>12.4f}  {cycles_str}")
 
         # --- Summary ---
         print("\n" + "=" * 65)
-        print("Summary")
+        print(f"Summary ({benchmark})")
         print("=" * 65)
         print(f"  Samples tested   : {n}")
-        print(f"  TFLite accuracy  : {tflite_correct}/{n} "
-              f"({100.0 * tflite_correct / n:.1f}%)")
-        print(f"  DUT accuracy     : {dut_correct}/{n} "
-              f"({100.0 * dut_correct / n:.1f}%)")
-        print(f"  Agreement rate   : {agree_count}/{n} "
-              f"({100.0 * agree_count / n:.1f}%)")
+
+        if is_classification:
+            print(f"  TFLite accuracy  : {tflite_correct}/{n} "
+                  f"({100.0 * tflite_correct / n:.1f}%)")
+            print(f"  DUT accuracy     : {dut_correct}/{n} "
+                  f"({100.0 * dut_correct / n:.1f}%)")
+            print(f"  Agreement rate   : {agree_count}/{n} "
+                  f"({100.0 * agree_count / n:.1f}%)")
+        else:
+            print(f"  Valid results    : {agree_count}/{n}")
 
         if dut_latencies:
             lat = np.array(dut_latencies, dtype=np.int64)
@@ -373,12 +486,16 @@ def run_golden_test(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Golden inference comparison: TFLite vs K230 DUT "
-                    "(MLPerf Tiny Image Classification)"
+        description="Golden inference comparison: TFLite vs K230 DUT"
+    )
+    parser.add_argument(
+        "--benchmark", required=True,
+        choices=list(BENCHMARK_CONFIG.keys()),
+        help="Benchmark to test",
     )
     parser.add_argument(
         "-n", type=int, default=100,
-        help="Number of CIFAR-10 test samples to evaluate (default: 100)",
+        help="Number of test samples to evaluate (default: 100)",
     )
     parser.add_argument(
         "--port", default="/dev/ttyACM1",
@@ -393,8 +510,8 @@ def main():
         help="Per-command serial timeout in seconds (default: 10.0)",
     )
     parser.add_argument(
-        "--tflite", default=TFLITE_PATH,
-        help="Path to float32 TFLite model",
+        "--tflite", default=None,
+        help="Path to float32 TFLite model (default: benchmark-specific)",
     )
     args = parser.parse_args()
 

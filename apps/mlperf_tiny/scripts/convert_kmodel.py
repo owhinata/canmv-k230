@@ -1,4 +1,4 @@
-"""Convert MLPerf Tiny TFLite model to K230 kmodel.
+"""Convert MLPerf Tiny TFLite models to K230 kmodel.
 
 Pipeline: TFLite (float32) -> ONNX (tf2onnx) -> simplify (onnxsim) -> kmodel (nncase)
 
@@ -12,8 +12,9 @@ identity mean/std (0/1) triggers an nncase FoldNopBinary bug where internal
 nop nodes (Add(x,0), Mul(x,1)) lack type info, causing an assertion failure.
 
 Usage:
-  python apps/mlperf_tiny/scripts/convert_kmodel.py
-  python apps/mlperf_tiny/scripts/convert_kmodel.py -o /path/to/output.kmodel
+  python convert_kmodel.py --benchmark ic01
+  python convert_kmodel.py --benchmark ic01 vww01 kws01 ad01
+  python convert_kmodel.py --benchmark ic01 vww01 kws01 ad01 -o build/kmodels
 
 Prerequisites:
   pip install tf2onnx tensorflow-cpu onnxsim nncase nncase-kpu
@@ -33,13 +34,38 @@ import nncase
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
-TFLITE_PATH = os.path.join(
-    REPO_ROOT,
-    "mlperf_tiny/benchmark/training/image_classification/"
-    "trained_models/pretrainedResnet.tflite",
-)
+TRAINING_DIR = os.path.join(REPO_ROOT, "mlperf_tiny", "benchmark", "training")
 
-INPUT_H, INPUT_W, INPUT_C = 32, 32, 3
+BENCHMARKS = {
+    "ic01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "image_classification/trained_models/pretrainedResnet.tflite",
+        ),
+        "shape": [1, 32, 32, 3],
+    },
+    "vww01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "visual_wake_words/trained_models/vww_96_float.tflite",
+        ),
+        "shape": [1, 96, 96, 3],
+    },
+    "kws01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "keyword_spotting/trained_models/kws_ref_model_float32.tflite",
+        ),
+        "shape": [1, 49, 10, 1],
+    },
+    "ad01": {
+        "tflite": os.path.join(
+            TRAINING_DIR,
+            "anomaly_detection/trained_models/ad01_fp32.tflite",
+        ),
+        "shape": [1, 640],
+    },
+}
 
 
 def tflite_to_onnx(tflite_path, onnx_path):
@@ -74,7 +100,7 @@ def tflite_to_onnx(tflite_path, onnx_path):
     return True
 
 
-def onnx_to_kmodel(onnx_path, kmodel_path):
+def onnx_to_kmodel(onnx_path, kmodel_path, input_shape):
     """Convert ONNX to kmodel using nncase PTQ."""
     compile_options = nncase.CompileOptions()
     compile_options.target = "k230"
@@ -82,9 +108,9 @@ def onnx_to_kmodel(onnx_path, kmodel_path):
     compile_options.dump_asm = False
     # preprocess=False to avoid FoldNopBinary bug with identity mean/std
     compile_options.preprocess = False
-    compile_options.input_shape = [1, INPUT_H, INPUT_W, INPUT_C]
-    compile_options.input_layout = "NHWC"
-    compile_options.output_layout = "NHWC"
+    compile_options.input_shape = input_shape
+    compile_options.input_layout = "NHWC" if len(input_shape) == 4 else ""
+    compile_options.output_layout = "NHWC" if len(input_shape) == 4 else ""
 
     ptq_options = nncase.PTQTensorOptions()
     ptq_options.quant_type = "uint8"
@@ -99,9 +125,7 @@ def onnx_to_kmodel(onnx_path, kmodel_path):
 
     # Random calibration data (float32 [0,255], matching model input range)
     samples = [
-        np.random.randint(0, 256, (1, INPUT_H, INPUT_W, INPUT_C)).astype(
-            np.float32
-        )
+        np.random.randint(0, 256, input_shape).astype(np.float32)
         for _ in range(5)
     ]
     ptq_options.samples_count = len(samples)
@@ -123,51 +147,80 @@ def onnx_to_kmodel(onnx_path, kmodel_path):
     return True
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Convert MLPerf Tiny TFLite model to K230 kmodel"
-    )
-    parser.add_argument(
-        "-o", "--output",
-        default=os.path.join(SCRIPT_DIR, "..", "model.kmodel"),
-        help="Output kmodel path",
-    )
-    parser.add_argument(
-        "--tflite",
-        default=TFLITE_PATH,
-        help="Input TFLite model path (float32, not quantized)",
-    )
-    args = parser.parse_args()
+def convert_benchmark(bench_id, output_dir):
+    """Convert a single benchmark's TFLite model to kmodel."""
+    cfg = BENCHMARKS[bench_id]
+    tflite_path = cfg["tflite"]
+    input_shape = cfg["shape"]
+    kmodel_path = os.path.join(output_dir, f"{bench_id}.kmodel")
 
-    output_path = os.path.abspath(args.output)
+    print(f"\n{'='*60}")
+    print(f"Benchmark: {bench_id}")
+    print(f"  TFLite:  {tflite_path}")
+    print(f"  Shape:   {input_shape}")
+    print(f"  Output:  {kmodel_path}")
 
-    if not os.path.exists(args.tflite):
-        print(f"ERROR: TFLite model not found: {args.tflite}")
+    if not os.path.exists(tflite_path):
+        print(f"ERROR: TFLite model not found: {tflite_path}")
         print("Run: git submodule update --init mlperf_tiny")
-        return 1
-
-    print(f"Input:  {args.tflite}")
-    print(f"Output: {output_path}")
+        return False
 
     # Step 1: TFLite -> ONNX (simplified)
-    print("\n[1/2] TFLite -> ONNX")
+    print("\n  [1/2] TFLite -> ONNX")
     with tempfile.NamedTemporaryFile(suffix=".onnx", delete=False) as tmp:
         onnx_path = tmp.name
 
     try:
-        if not tflite_to_onnx(args.tflite, onnx_path):
-            return 1
+        if not tflite_to_onnx(tflite_path, onnx_path):
+            return False
 
         # Step 2: ONNX -> kmodel
-        print("\n[2/2] ONNX -> kmodel")
-        if not onnx_to_kmodel(onnx_path, output_path):
-            return 1
+        print("\n  [2/2] ONNX -> kmodel")
+        if not onnx_to_kmodel(onnx_path, kmodel_path, input_shape):
+            return False
     finally:
         if os.path.exists(onnx_path):
             os.unlink(onnx_path)
 
-    print(f"\nDone: {output_path}")
-    return 0
+    return True
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Convert MLPerf Tiny TFLite models to K230 kmodel"
+    )
+    parser.add_argument(
+        "--benchmark", nargs="+",
+        default=list(BENCHMARKS.keys()),
+        choices=list(BENCHMARKS.keys()),
+        help="Benchmarks to convert (default: all)",
+    )
+    parser.add_argument(
+        "-o", "--output",
+        default=os.path.join(SCRIPT_DIR, "..", "kmodels"),
+        help="Output directory for kmodel files",
+    )
+    args = parser.parse_args()
+
+    output_dir = os.path.abspath(args.output)
+    os.makedirs(output_dir, exist_ok=True)
+
+    success = []
+    failed = []
+    for bench_id in args.benchmark:
+        if convert_benchmark(bench_id, output_dir):
+            success.append(bench_id)
+        else:
+            failed.append(bench_id)
+
+    print(f"\n{'='*60}")
+    print(f"Done: {len(success)} succeeded, {len(failed)} failed")
+    if success:
+        print(f"  OK: {', '.join(success)}")
+    if failed:
+        print(f"  FAILED: {', '.join(failed)}")
+
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

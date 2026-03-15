@@ -1,0 +1,10 @@
+{
+  "benchmark": "keyword_spotting",
+  "dataset": "speech_commands",
+  "model": "ds_cnn",
+  "input_size": [49, 10, 1],
+  "runtime": "nncase",
+  "device": "K230",
+  "timestamp_source": "rdcycle",
+  "uart_baudrate": 115200
+}
