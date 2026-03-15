@@ -372,6 +372,7 @@ def run_golden_test(args):
         dut_correct = 0
         agree_count = 0
         dut_latencies = []
+        sample_results = []  # for JSON export
 
         if is_classification:
             print(f"\n{'idx':>5}  {'label':>10}  {'tflite':>10}  {'dut':>10}  "
@@ -440,6 +441,14 @@ def run_golden_test(args):
 
                 print(f"{i:>5}  {label_name:>10}  {tflite_name:>10}  "
                       f"{dut_name:>10}  {match_str:>5}  {cycles_str}")
+
+                sample_results.append({
+                    "index": i, "label": label,
+                    "tflite_class": tflite_class, "dut_class": dut_class,
+                    "agreed": agreed, "dut_results": dut_results,
+                    "cycles_start": cyc_start, "cycles_end": cyc_end,
+                    "elapsed_cycles": cycles,
+                })
             else:
                 # Regression (AD): compare MSE
                 if dut_results is not None and len(dut_results) == output_elements:
@@ -451,6 +460,12 @@ def run_golden_test(args):
                     print(f"  WARNING: sample {i} - failed to parse DUT results")
 
                 print(f"{i:>5}  {mse:>12.4f}  {cycles_str}")
+
+                sample_results.append({
+                    "index": i, "label": label, "mse": mse,
+                    "cycles_start": cyc_start, "cycles_end": cyc_end,
+                    "elapsed_cycles": cycles,
+                })
 
         # --- Summary ---
         print("\n" + "=" * 65)
@@ -475,6 +490,39 @@ def run_golden_test(args):
             print(f"    max    : {lat.max():>12,}")
             print(f"    mean   : {lat.mean():>12,.0f}")
             print(f"    median : {int(np.median(lat)):>12,}")
+
+        # --- Save JSON results ---
+        if hasattr(args, "results_json") and args.results_json:
+            import json
+            lat = np.array(dut_latencies, dtype=np.int64) if dut_latencies else np.array([])
+            summary = {
+                "benchmark": benchmark,
+                "samples_tested": n,
+                "task": cfg["task"],
+                "latency": {
+                    "unit": "rdcycle",
+                    "cpu_frequency_ghz": 1.6,
+                    "count": len(dut_latencies),
+                    "min": int(lat.min()) if len(lat) > 0 else None,
+                    "max": int(lat.max()) if len(lat) > 0 else None,
+                    "mean": float(lat.mean()) if len(lat) > 0 else None,
+                    "median": int(np.median(lat)) if len(lat) > 0 else None,
+                    "std": float(lat.std()) if len(lat) > 0 else None,
+                },
+            }
+            if is_classification:
+                summary["tflite_accuracy"] = tflite_correct / n if n > 0 else 0
+                summary["dut_accuracy"] = dut_correct / n if n > 0 else 0
+                summary["agreement_rate"] = agree_count / n if n > 0 else 0
+            else:
+                summary["valid_results"] = agree_count
+
+            results_data = {"summary": summary, "samples": sample_results}
+            results_path = os.path.abspath(args.results_json)
+            os.makedirs(os.path.dirname(results_path), exist_ok=True)
+            with open(results_path, "w") as f:
+                json.dump(results_data, f, indent=2, default=str)
+            print(f"\nResults saved to {results_path}")
 
     finally:
         print("\nStopping DUT...")
@@ -512,6 +560,10 @@ def main():
     parser.add_argument(
         "--tflite", default=None,
         help="Path to float32 TFLite model (default: benchmark-specific)",
+    )
+    parser.add_argument(
+        "--results-json", default=None,
+        help="Save results to JSON file for submission",
     )
     args = parser.parse_args()
 

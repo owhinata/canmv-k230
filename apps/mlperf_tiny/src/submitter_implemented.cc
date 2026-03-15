@@ -163,47 +163,44 @@ void th_load_tensor() {
   auto in_span = in_map.buffer();
   auto desc = interp.input_desc(0);
 
-  if (desc.datatype == nncase::typecode_t::dt_float32) {
-    // Float32 input (e.g. AD): read raw float32 bytes from buffer
-    uint8_t raw_buf[MAX_DB_INPUT_SIZE];
-    size_t expected = input_elements_ * sizeof(float);
-    size_t bytes = ee_get_buffer(raw_buf, expected);
-    if (bytes != expected) {
-      th_printf("Input db has %d bytes, expected %d\n",
-                static_cast<int>(bytes), static_cast<int>(expected));
-      return;
-    }
-    memcpy(in_span.data(), raw_buf, expected);
-  } else {
-    // Quantized input (IC/VWW/KWS): read uint8 elements
-    uint8_t input_quantized[MAX_DB_INPUT_SIZE];
-    size_t bytes =
-        ee_get_buffer(input_quantized, input_elements_ * sizeof(uint8_t));
-    if (static_cast<int>(bytes / sizeof(uint8_t)) != input_elements_) {
-      th_printf("Input db has %d elements, expected %d\n",
-                static_cast<int>(bytes / sizeof(uint8_t)), input_elements_);
-      return;
-    }
+  // Read from db buffer — request up to float32 size to auto-detect format.
+  // If db has input_elements_*4 bytes → raw float32 (AD benchmark).
+  // If db has input_elements_   bytes → uint8 data (IC/VWW/KWS).
+  uint8_t input_buf[MAX_DB_INPUT_SIZE];
+  size_t float_size = input_elements_ * sizeof(float);
+  size_t uint8_size = input_elements_ * sizeof(uint8_t);
+  size_t bytes = ee_get_buffer(
+      input_buf, float_size < MAX_DB_INPUT_SIZE ? float_size : uint8_size);
 
+  if (bytes == float_size && float_size != uint8_size) {
+    // Raw float32 bytes (e.g. AD: 640 elements × 4 = 2560 bytes)
+    memcpy(in_span.data(), input_buf, float_size);
+  } else if (bytes == uint8_size) {
+    // uint8 data (IC/VWW/KWS)
     if (desc.datatype == nncase::typecode_t::dt_int8) {
-      // Convert uint8 [0,255] -> int8 [-128,127]
       int8_t* dst = reinterpret_cast<int8_t*>(in_span.data());
       for (int i = 0; i < input_elements_; i++) {
-        if (input_quantized[i] <= 127) {
-          dst[i] = static_cast<int8_t>(input_quantized[i]) - 128;
+        if (input_buf[i] <= 127) {
+          dst[i] = static_cast<int8_t>(input_buf[i]) - 128;
         } else {
-          dst[i] = static_cast<int8_t>(input_quantized[i] - 128);
+          dst[i] = static_cast<int8_t>(input_buf[i] - 128);
         }
       }
     } else if (desc.datatype == nncase::typecode_t::dt_uint8) {
-      memcpy(in_span.data(), input_quantized, input_elements_);
+      memcpy(in_span.data(), input_buf, uint8_size);
+    } else if (desc.datatype == nncase::typecode_t::dt_float32) {
+      // Cast uint8 [0,255] -> float32 (nncase handles internal quantization)
+      float* dst = reinterpret_cast<float*>(in_span.data());
+      for (int i = 0; i < input_elements_; i++) {
+        dst[i] = static_cast<float>(input_buf[i]);
+      }
     } else {
-      th_printf("WARNING: unsupported input dtype, copying raw bytes\n");
-      size_t copy_len = static_cast<size_t>(input_elements_) < in_span.size()
-                            ? static_cast<size_t>(input_elements_)
-                            : in_span.size();
-      memcpy(in_span.data(), input_quantized, copy_len);
+      memcpy(in_span.data(), input_buf, uint8_size);
     }
+  } else {
+    th_printf("Input db has %d bytes, expected %d or %d\n",
+              static_cast<int>(bytes), static_cast<int>(uint8_size),
+              static_cast<int>(float_size));
   }
 }
 
