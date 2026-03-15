@@ -7,6 +7,7 @@
 - **ブランチ**: `feat/`, `docs/`, `style/`, `fix/`, `build/`, `refactor/`, `chore/` prefix。ベースは常に `main`
 - **コミット**: conventional commits 形式 `type: short description`
 - **`k230_sdk/`**: サブモジュール。変更はコミットしない（`build_sdk.sh` が実行時にパッチする）
+- **`mlperf_tiny/`**: サブモジュール（mlcommons/tiny）。変更はコミットしない
 
 ### PR作成
 
@@ -88,4 +89,39 @@ GitHub パーマリンク（コミットハッシュ + 行番号）を使用。�
 ```bash
 cmake -B apps/<app>/build -S apps/<app> -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-k230-rtsmart.cmake
 cmake --build apps/<app>/build
+```
+
+## K230 bigcore (RT-Smart msh) の注意点
+
+### シリアル入力の行バッファリング
+
+msh はプログラムの stdin に対して **行バッファリング** を行う。`getchar()` はユーザーが CR (`\r`) を送るまでブロックする。
+
+- プログラムにリアルタイムで文字を渡したい場合、**送信データの末尾に `\r` を付ける**
+- プログラム側で `\r` / `\n` が不要な場合（例: MLPerf Tiny の `%` 終端プロトコル）、メインループでフィルタする:
+  ```cpp
+  if (c == '\r' || c == '\n') continue;
+  ```
+
+### printf バッファリング
+
+RT-Smart の `printf` / `vprintf` は出力をバッファする場合がある。シリアル経由で即座にレスポンスを返す必要がある場合は、書き込み後に `fflush(stdout)` を呼ぶ。`setvbuf(stdout, nullptr, _IONBF, 0)` で完全に無効化も可能。
+
+### プロセス終了と msh ハング
+
+bigcore で動作中のプログラムが異常終了すると **msh がハングし、シリアル入力を受け付けなくなる**場合がある。この場合は K230 の **HW リセット**（電源再投入）が必要。
+
+- `Ctrl+C` で停止できる場合もあるが、保証されない
+- 長時間実行するプログラムでは SIGINT ハンドラの実装を検討する
+
+### nncase ライブラリのリンク順序
+
+nncase の K230 ランタイムライブラリ (`libnncase.rt_modules.k230.a`) は MPP ライブラリ (`kd_mpi_sys_mmz_*`) に依存する。循環依存を解決するため、MPP と nncase を同じ `--start-group` / `--end-group` ブロックに含める:
+
+```cmake
+target_link_libraries(app PRIVATE
+    -L${MPP_LIB_DIR}
+    -L${_NNCASE_ROOT}/nncase/lib
+    -Wl,--start-group ${_MPP_LIBS} -lNncase.Runtime.Native -lnncase.rt_modules.k230 -Wl,--end-group
+)
 ```

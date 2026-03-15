@@ -1,0 +1,10 @@
+{
+  "benchmark": "image_classification",
+  "dataset": "cifar10",
+  "model": "resnet8",
+  "input_size": [32, 32, 3],
+  "runtime": "nncase",
+  "device": "K230",
+  "timestamp_source": "rdcycle",
+  "uart_baudrate": 115200
+}

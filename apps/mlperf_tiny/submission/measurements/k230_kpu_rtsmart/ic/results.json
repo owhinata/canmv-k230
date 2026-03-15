@@ -1,0 +1,5602 @@
+[
+  {
+    "file": "emu_s_002009.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5633290543352,
+      "end_time": 5633294337193,
+      "results": [
+        0.002,
+        0.004,
+        0.0,
+        0.004,
+        0.0,
+        0.485,
+        0.0,
+        0.496,
+        0.0,
+        0.009
+      ],
+      "elapsed_time": 3793841,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "taxi_s_001241.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5634598759437,
+      "end_time": 5634602531160,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3771723,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "accentor_s_001031.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5635917767153,
+      "end_time": 5635921525345,
+      "results": [
+        0.002,
+        0.0,
+        0.061,
+        0.359,
+        0.137,
+        0.058,
+        0.38,
+        0.002,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3758192,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "mongrel_s_000686.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5637245336656,
+      "end_time": 5637249091091,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.113,
+        0.001,
+        0.868,
+        0.008,
+        0.009,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3754435,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_bomber_s_002204.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5638570873451,
+      "end_time": 5638574627945,
+      "results": [
+        0.894,
+        0.0,
+        0.001,
+        0.002,
+        0.021,
+        0.001,
+        0.067,
+        0.012,
+        0.001,
+        0.001
+      ],
+      "elapsed_time": 3754494,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dama_dama_s_000007.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5639899925100,
+      "end_time": 5639903671252,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.993,
+        0.006,
+        0.0,
+        0.002,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746152,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "blenheim_spaniel_s_000355.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5641227682443,
+      "end_time": 5641231432659,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3750216,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "muntjac_s_001495.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5642569496775,
+      "end_time": 5642573245956,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.803,
+        0.0,
+        0.0,
+        0.196,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749181,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "station_wagon_s_002096.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5643900001097,
+      "end_time": 5643903751835,
+      "results": [
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "elapsed_time": 3750738,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "alley_cat_s_001902.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5645239109695,
+      "end_time": 5645242856861,
+      "results": [
+        0.039,
+        0.01,
+        0.022,
+        0.048,
+        0.0,
+        0.0,
+        0.879,
+        0.0,
+        0.0,
+        0.002
+      ],
+      "elapsed_time": 3747166,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fighter_aircraft_s_001537.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5646578714038,
+      "end_time": 5646582458402,
+      "results": [
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744364,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "puppy_s_000654.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5647901576580,
+      "end_time": 5647905325732,
+      "results": [
+        0.0,
+        0.006,
+        0.0,
+        0.167,
+        0.001,
+        0.81,
+        0.01,
+        0.002,
+        0.0,
+        0.004
+      ],
+      "elapsed_time": 3749152,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tennessee_walker_s_000353.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5649241150501,
+      "end_time": 5649244902010,
+      "results": [
+        0.016,
+        0.006,
+        0.0,
+        0.001,
+        0.01,
+        0.032,
+        0.0,
+        0.929,
+        0.0,
+        0.006
+      ],
+      "elapsed_time": 3751509,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "american_elk_s_001535.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5650585898590,
+      "end_time": 5650589648297,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.974,
+        0.0,
+        0.0,
+        0.026,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749707,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "trailer_truck_s_000002.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5651933358068,
+      "end_time": 5651937105733,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.999
+      ],
+      "elapsed_time": 3747665,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tomcat_s_000123.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5653258754508,
+      "end_time": 5653262503060,
+      "results": [
+        0.0,
+        0.0,
+        0.061,
+        0.929,
+        0.0,
+        0.0,
+        0.01,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748552,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "ostrich_s_000571.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5654591242820,
+      "end_time": 5654594989178,
+      "results": [
+        0.047,
+        0.011,
+        0.481,
+        0.077,
+        0.015,
+        0.005,
+        0.221,
+        0.072,
+        0.001,
+        0.069
+      ],
+      "elapsed_time": 3746358,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pekingese_s_001557.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5655932689164,
+      "end_time": 5655936437483,
+      "results": [
+        0.007,
+        0.006,
+        0.008,
+        0.429,
+        0.0,
+        0.525,
+        0.015,
+        0.0,
+        0.0,
+        0.01
+      ],
+      "elapsed_time": 3748319,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "rana_cascadae_s_000003.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5657259717119,
+      "end_time": 5657263465184,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.004,
+        0.0,
+        0.995,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748065,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wapiti_s_001247.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5658597067838,
+      "end_time": 5658600814688,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746850,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cervus_elaphus_s_000997.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5659944251078,
+      "end_time": 5659948000315,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749237,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "convertible_s_000457.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5661268115917,
+      "end_time": 5661271863417,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747500,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "convertible_s_000890.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5662589210974,
+      "end_time": 5662592956704,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745730,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "merchant_ship_s_001766.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5663922554186,
+      "end_time": 5663926299044,
+      "results": [
+        0.124,
+        0.0,
+        0.041,
+        0.0,
+        0.104,
+        0.0,
+        0.0,
+        0.0,
+        0.726,
+        0.005
+      ],
+      "elapsed_time": 3744858,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "king_charles_spaniel_s_000003.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5665250555034,
+      "end_time": 5665254301901,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.152,
+        0.0,
+        0.591,
+        0.0,
+        0.256,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746867,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tipper_truck_s_001753.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5666584867278,
+      "end_time": 5666588611734,
+      "results": [
+        0.0,
+        0.016,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.984
+      ],
+      "elapsed_time": 3744456,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "passenger_ship_s_002208.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5667906192855,
+      "end_time": 5667909943400,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3750545,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cervus_elaphus_s_001039.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5669239089278,
+      "end_time": 5669242836365,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.0,
+        0.988,
+        0.0,
+        0.01,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747087,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "arabian_s_001271.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5670566798644,
+      "end_time": 5670570547473,
+      "results": [
+        0.017,
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.98,
+        0.0,
+        0.002
+      ],
+      "elapsed_time": 3748829,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "arabian_s_002049.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5671897253391,
+      "end_time": 5671901003136,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.004,
+        0.0,
+        0.0,
+        0.995,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749745,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cock_s_000054.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5673230474455,
+      "end_time": 5673234220850,
+      "results": [
+        0.003,
+        0.001,
+        0.272,
+        0.071,
+        0.001,
+        0.366,
+        0.0,
+        0.28,
+        0.0,
+        0.007
+      ],
+      "elapsed_time": 3746395,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "muntjac_s_000528.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5674554952970,
+      "end_time": 5674558705589,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.004,
+        0.993,
+        0.0,
+        0.003,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3752619,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "police_cruiser_s_000784.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5675895087269,
+      "end_time": 5675898837490,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3750221,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bullfrog_s_000013.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5677228291532,
+      "end_time": 5677232038643,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.019,
+        0.004,
+        0.0,
+        0.976,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747111,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "truck_s_001115.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5678584017711,
+      "end_time": 5678587761035,
+      "results": [
+        0.068,
+        0.003,
+        0.005,
+        0.001,
+        0.001,
+        0.0,
+        0.19,
+        0.0,
+        0.0,
+        0.733
+      ],
+      "elapsed_time": 3743324,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "rhea_americana_s_000047.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5679930760055,
+      "end_time": 5679934508190,
+      "results": [
+        0.0,
+        0.0,
+        0.048,
+        0.0,
+        0.005,
+        0.001,
+        0.945,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748135,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "biplane_s_000032.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5681269913836,
+      "end_time": 5681273660766,
+      "results": [
+        0.914,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.002,
+        0.008,
+        0.075
+      ],
+      "elapsed_time": 3746930,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "station_wagon_s_002543.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5682605397930,
+      "end_time": 5682609148408,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3750478,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stag_s_000985.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5683939418434,
+      "end_time": 5683943164253,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745819,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "walking_horse_s_001755.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5685272027434,
+      "end_time": 5685275776598,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.002,
+        0.0,
+        0.998,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749164,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "freighter_s_001090.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5686593539298,
+      "end_time": 5686597286970,
+      "results": [
+        0.003,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.996,
+        0.001
+      ],
+      "elapsed_time": 3747672,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lorry_s_002019.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5687899873012,
+      "end_time": 5687903619195,
+      "results": [
+        0.005,
+        0.009,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.004,
+        0.982
+      ],
+      "elapsed_time": 3746183,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "iceboat_s_000293.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5689233723540,
+      "end_time": 5689237470489,
+      "results": [
+        0.013,
+        0.0,
+        0.002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.984,
+        0.001
+      ],
+      "elapsed_time": 3746949,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_fighter_s_000397.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5690589817089,
+      "end_time": 5690593561727,
+      "results": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744638,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "rana_temporaria_s_001366.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5691923758863,
+      "end_time": 5691927510357,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3751494,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pekingese_s_002210.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5693267528762,
+      "end_time": 5693271276226,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.176,
+        0.0,
+        0.815,
+        0.0,
+        0.001,
+        0.007,
+        0.0
+      ],
+      "elapsed_time": 3747464,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "auto_s_001172.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5694606213956,
+      "end_time": 5694609960904,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746948,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "sambar_s_000303.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5695948604595,
+      "end_time": 5695952351653,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747058,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bird_s_000558.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5697282544764,
+      "end_time": 5697286289393,
+      "results": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744629,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stud_mare_s_000978.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5698624798291,
+      "end_time": 5698628544517,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746226,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "freighter_s_000063.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5699953921751,
+      "end_time": 5699957664300,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3742549,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "passenger_ship_s_001728.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5701291592463,
+      "end_time": 5701295338171,
+      "results": [
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.998,
+        0.0
+      ],
+      "elapsed_time": 3745708,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bufo_bufo_s_000332.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5702613204423,
+      "end_time": 5702616946489,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742066,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "house_cat_s_000190.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5703946187278,
+      "end_time": 5703949932486,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.256,
+        0.0,
+        0.391,
+        0.001,
+        0.351,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745208,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wagon_s_001634.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5705266703497,
+      "end_time": 5705270450597,
+      "results": [
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999
+      ],
+      "elapsed_time": 3747100,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "japanese_spaniel_s_000006.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5706593394584,
+      "end_time": 5706597139121,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744537,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "house_cat_s_000385.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5707925720778,
+      "end_time": 5707929470543,
+      "results": [
+        0.777,
+        0.001,
+        0.003,
+        0.199,
+        0.0,
+        0.001,
+        0.0,
+        0.018,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749765,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "ostrich_s_002220.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5709250374846,
+      "end_time": 5709254119125,
+      "results": [
+        0.009,
+        0.002,
+        0.262,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.726
+      ],
+      "elapsed_time": 3744279,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tennessee_walker_s_000914.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5710578602201,
+      "end_time": 5710582347779,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.093,
+        0.023,
+        0.0,
+        0.884,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745578,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "domestic_dog_s_000447.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5711891696193,
+      "end_time": 5711895439321,
+      "results": [
+        0.0,
+        0.0,
+        0.003,
+        0.232,
+        0.582,
+        0.18,
+        0.001,
+        0.003,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743128,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "japanese_spaniel_s_000025.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5713209510007,
+      "end_time": 5713213254562,
+      "results": [
+        0.0,
+        0.0,
+        0.719,
+        0.025,
+        0.002,
+        0.183,
+        0.003,
+        0.062,
+        0.0,
+        0.006
+      ],
+      "elapsed_time": 3744555,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_fighter_s_000807.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5714536409796,
+      "end_time": 5714540157934,
+      "results": [
+        0.513,
+        0.0,
+        0.001,
+        0.003,
+        0.269,
+        0.0,
+        0.208,
+        0.001,
+        0.005,
+        0.0
+      ],
+      "elapsed_time": 3748138,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stud_mare_s_000611.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5715867230393,
+      "end_time": 5715870974195,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743802,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "crapaud_s_001521.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5717189080306,
+      "end_time": 5717192823171,
+      "results": [
+        0.0,
+        0.0,
+        0.003,
+        0.268,
+        0.0,
+        0.0,
+        0.729,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742865,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "arabian_s_001976.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5718511248152,
+      "end_time": 5718514993962,
+      "results": [
+        0.0,
+        0.505,
+        0.0,
+        0.002,
+        0.0,
+        0.0,
+        0.002,
+        0.491,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745810,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dump_truck_s_000692.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5719844693736,
+      "end_time": 5719848437086,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999
+      ],
+      "elapsed_time": 3743350,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "truck_s_000064.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5721163525612,
+      "end_time": 5721167272975,
+      "results": [
+        0.0,
+        0.008,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.992
+      ],
+      "elapsed_time": 3747363,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "gelding_s_000561.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5722514852213,
+      "end_time": 5722518602929,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3750716,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "rana_temporaria_s_000299.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5723842452957,
+      "end_time": 5723846200190,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747233,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "barking_frog_s_000042.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5725179647732,
+      "end_time": 5725183393862,
+      "results": [
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.991,
+        0.0,
+        0.0,
+        0.008
+      ],
+      "elapsed_time": 3746130,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "coupe_s_001831.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5726531284272,
+      "end_time": 5726535030519,
+      "results": [
+        0.0,
+        0.997,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.003
+      ],
+      "elapsed_time": 3746247,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "domestic_cat_s_001925.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5727861969967,
+      "end_time": 5727865716019,
+      "results": [
+        0.0,
+        0.0,
+        0.004,
+        0.44,
+        0.005,
+        0.0,
+        0.551,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746052,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dredger_s_001602.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5729203079071,
+      "end_time": 5729206823210,
+      "results": [
+        0.01,
+        0.0,
+        0.002,
+        0.0,
+        0.005,
+        0.0,
+        0.002,
+        0.0,
+        0.98,
+        0.0
+      ],
+      "elapsed_time": 3744139,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wagon_s_001104.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5730551845690,
+      "end_time": 5730555597266,
+      "results": [
+        0.0,
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.002
+      ],
+      "elapsed_time": 3751576,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "appaloosa_s_001590.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5731883781234,
+      "end_time": 5731887529615,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748381,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pontoon_s_000606.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5733227649108,
+      "end_time": 5733231393338,
+      "results": [
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0
+      ],
+      "elapsed_time": 3744230,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tabby_s_001714.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5734562111391,
+      "end_time": 5734565858821,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747430,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "liberty_ship_s_000312.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5735891296452,
+      "end_time": 5735895042370,
+      "results": [
+        0.013,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.986,
+        0.0
+      ],
+      "elapsed_time": 3745918,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fawn_s_001630.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5737228335389,
+      "end_time": 5737232076630,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.998,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3741241,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "propeller_plane_s_000183.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5738562440515,
+      "end_time": 5738566188463,
+      "results": [
+        0.986,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.014,
+        0.0
+      ],
+      "elapsed_time": 3747948,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "domestic_cat_s_001793.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5739869963261,
+      "end_time": 5739873704699,
+      "results": [
+        0.0,
+        0.0,
+        0.032,
+        0.138,
+        0.009,
+        0.809,
+        0.002,
+        0.01,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3741438,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "domestic_cat_s_000360.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5741200835966,
+      "end_time": 5741204580503,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744537,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "maltese_dog_s_000318.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5742520891749,
+      "end_time": 5742524634399,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.228,
+        0.001,
+        0.77,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742650,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "mouser_s_000320.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5743849839562,
+      "end_time": 5743853583515,
+      "results": [
+        0.0,
+        0.0,
+        0.012,
+        0.547,
+        0.002,
+        0.0,
+        0.439,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743953,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lapdog_s_001872.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5745181999385,
+      "end_time": 5745185745493,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.001,
+        0.0,
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746108,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cassowary_s_001156.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5746528542063,
+      "end_time": 5746532286168,
+      "results": [
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744105,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tipper_truck_s_001239.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5747860404575,
+      "end_time": 5747864151653,
+      "results": [
+        0.0,
+        0.006,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.994
+      ],
+      "elapsed_time": 3747078,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "felis_catus_s_000404.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5749202509982,
+      "end_time": 5749206254068,
+      "results": [
+        0.0,
+        0.0,
+        0.16,
+        0.785,
+        0.019,
+        0.015,
+        0.019,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744086,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "estate_car_s_000363.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5750539667366,
+      "end_time": 5750543412969,
+      "results": [
+        0.0,
+        0.99,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.01,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745603,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "broodmare_s_000816.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5751881917886,
+      "end_time": 5751885666807,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748921,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dawn_horse_s_001180.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5753218638220,
+      "end_time": 5753222384623,
+      "results": [
+        0.0,
+        0.0,
+        0.955,
+        0.001,
+        0.0,
+        0.0,
+        0.03,
+        0.013,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746403,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cat_s_001955.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5754551462262,
+      "end_time": 5754555209234,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746972,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pekingese_s_000793.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5755881958652,
+      "end_time": 5755885706653,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.034,
+        0.0,
+        0.962,
+        0.002,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748001,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "felis_catus_s_000115.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5757218895712,
+      "end_time": 5757222644231,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748519,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "green_frog_s_001434.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5758553457100,
+      "end_time": 5758557201922,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744822,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "puppy_s_002012.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5759898782278,
+      "end_time": 5759902526539,
+      "results": [
+        0.0,
+        0.0,
+        0.079,
+        0.012,
+        0.016,
+        0.168,
+        0.718,
+        0.006,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744261,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bird_s_000229.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5761249839627,
+      "end_time": 5761253583452,
+      "results": [
+        0.057,
+        0.0,
+        0.554,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.387,
+        0.0
+      ],
+      "elapsed_time": 3743825,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "anthus_pratensis_s_000055.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5762592740155,
+      "end_time": 5762596488044,
+      "results": [
+        0.0,
+        0.0,
+        0.995,
+        0.0,
+        0.004,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747889,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dog_s_000740.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5763927990608,
+      "end_time": 5763931737241,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.018,
+        0.0,
+        0.981,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746633,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "passenger_ship_s_001606.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5765250625241,
+      "end_time": 5765254369661,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3744420,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "attack_aircraft_s_000571.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5766565216268,
+      "end_time": 5766568962980,
+      "results": [
+        0.998,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.002
+      ],
+      "elapsed_time": 3746712,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "quarter_horse_s_000500.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5767890467000,
+      "end_time": 5767894212707,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745707,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "trucking_rig_s_001395.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5769223630033,
+      "end_time": 5769227375143,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.003,
+        0.0,
+        0.996
+      ],
+      "elapsed_time": 3745110,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_bomber_s_001550.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5770560678073,
+      "end_time": 5770564420541,
+      "results": [
+        0.002,
+        0.069,
+        0.008,
+        0.654,
+        0.179,
+        0.003,
+        0.005,
+        0.005,
+        0.073,
+        0.002
+      ],
+      "elapsed_time": 3742468,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "leopard_frog_s_001170.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5771874351761,
+      "end_time": 5771878094390,
+      "results": [
+        0.004,
+        0.001,
+        0.017,
+        0.054,
+        0.269,
+        0.0,
+        0.655,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742629,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "coupe_s_000456.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5773208626245,
+      "end_time": 5773212368654,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742409,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pipit_s_001762.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5774518877829,
+      "end_time": 5774522623933,
+      "results": [
+        0.127,
+        0.011,
+        0.273,
+        0.174,
+        0.267,
+        0.001,
+        0.097,
+        0.002,
+        0.044,
+        0.005
+      ],
+      "elapsed_time": 3746104,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bullfrog_s_000196.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5775838196209,
+      "end_time": 5775841947113,
+      "results": [
+        0.0,
+        0.0,
+        0.004,
+        0.0,
+        0.0,
+        0.0,
+        0.996,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3750904,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "twinjet_s_000024.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5777165666773,
+      "end_time": 5777169412000,
+      "results": [
+        0.999,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745227,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "camion_s_001422.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5778500535245,
+      "end_time": 5778504280977,
+      "results": [
+        0.003,
+        0.175,
+        0.0,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.02,
+        0.801
+      ],
+      "elapsed_time": 3745732,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fire_engine_s_001608.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5779829070140,
+      "end_time": 5779832815161,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3745021,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fire_truck_s_000774.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5781161692227,
+      "end_time": 5781165439522,
+      "results": [
+        0.0,
+        0.952,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.048
+      ],
+      "elapsed_time": 3747295,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "mutt_s_000099.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5782469714513,
+      "end_time": 5782473457294,
+      "results": [
+        0.001,
+        0.0,
+        0.001,
+        0.019,
+        0.0,
+        0.968,
+        0.0,
+        0.007,
+        0.0,
+        0.003
+      ],
+      "elapsed_time": 3742781,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "nandu_s_001738.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5783807396994,
+      "end_time": 5783811143980,
+      "results": [
+        0.0,
+        0.0,
+        0.695,
+        0.008,
+        0.05,
+        0.001,
+        0.244,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746986,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "police_cruiser_s_000113.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5785149390673,
+      "end_time": 5785153134100,
+      "results": [
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001
+      ],
+      "elapsed_time": 3743427,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "monoplane_s_000012.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5786484174883,
+      "end_time": 5786487918631,
+      "results": [
+        0.204,
+        0.045,
+        0.005,
+        0.105,
+        0.004,
+        0.007,
+        0.0,
+        0.023,
+        0.441,
+        0.165
+      ],
+      "elapsed_time": 3743748,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bufo_viridis_s_000198.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5787819624679,
+      "end_time": 5787823370423,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.004,
+        0.0,
+        0.0,
+        0.996,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745744,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "sea_boat_s_001161.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5789151923462,
+      "end_time": 5789155667717,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3744255,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fighter_aircraft_s_000386.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5790470650634,
+      "end_time": 5790474391687,
+      "results": [
+        0.321,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.622,
+        0.037,
+        0.02
+      ],
+      "elapsed_time": 3741053,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "mule_deer_s_000451.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5791808451590,
+      "end_time": 5791812194002,
+      "results": [
+        0.0,
+        0.0,
+        0.003,
+        0.001,
+        0.994,
+        0.001,
+        0.0,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742412,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "deer_s_001711.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5793152761324,
+      "end_time": 5793156504205,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.0,
+        0.995,
+        0.0,
+        0.001,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742881,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_fighter_s_000584.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5794493490890,
+      "end_time": 5794497237572,
+      "results": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746682,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "songbird_s_001048.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5795830638845,
+      "end_time": 5795834386787,
+      "results": [
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747942,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fighter_aircraft_s_001370.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5797169561730,
+      "end_time": 5797173308868,
+      "results": [
+        0.998,
+        0.0,
+        0.002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747138,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "laundry_truck_s_000491.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5798507394129,
+      "end_time": 5798511136309,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3742180,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "leopard_frog_s_000216.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5799854205926,
+      "end_time": 5799857951047,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.002,
+        0.0,
+        0.0,
+        0.995,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745121,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pickerel_frog_s_000341.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5801206174388,
+      "end_time": 5801209918468,
+      "results": [
+        0.001,
+        0.003,
+        0.003,
+        0.002,
+        0.0,
+        0.0,
+        0.961,
+        0.0,
+        0.0,
+        0.03
+      ],
+      "elapsed_time": 3744080,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_fighter_s_000883.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5802545618751,
+      "end_time": 5802549367076,
+      "results": [
+        0.953,
+        0.013,
+        0.02,
+        0.006,
+        0.003,
+        0.004,
+        0.0,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748325,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "dumper_s_000309.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5803880380513,
+      "end_time": 5803884125654,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3745141,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "biplane_s_001810.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5805213958845,
+      "end_time": 5805217704725,
+      "results": [
+        0.969,
+        0.0,
+        0.03,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745880,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tabby_cat_s_002739.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5806551473879,
+      "end_time": 5806555214657,
+      "results": [
+        0.0,
+        0.0,
+        0.009,
+        0.923,
+        0.0,
+        0.001,
+        0.066,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3740778,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cervus_elaphus_s_000038.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5807892622866,
+      "end_time": 5807896367896,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745030,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "moving_van_s_001436.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5809248256098,
+      "end_time": 5809251996109,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3740011,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "saddle_horse_s_002074.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5810595165206,
+      "end_time": 5810598910034,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744828,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "sea_boat_s_002032.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5811948858118,
+      "end_time": 5811952603228,
+      "results": [
+        0.002,
+        0.011,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.986,
+        0.001
+      ],
+      "elapsed_time": 3745110,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "camion_s_000130.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5813286808814,
+      "end_time": 5813290556023,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3747209,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bookmobile_s_001012.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5814626749618,
+      "end_time": 5814630489665,
+      "results": [
+        0.0,
+        0.002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.998
+      ],
+      "elapsed_time": 3740047,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wagon_s_001640.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5815965156119,
+      "end_time": 5815968899319,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743200,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fighter_s_000532.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5817312087640,
+      "end_time": 5817315834704,
+      "results": [
+        0.999,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747064,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_bomber_s_001916.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5818658706362,
+      "end_time": 5818662454791,
+      "results": [
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748429,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "toad_s_000408.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5819989113037,
+      "end_time": 5819992859091,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746054,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "barge_s_000524.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5821321715619,
+      "end_time": 5821325461403,
+      "results": [
+        0.687,
+        0.004,
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.001,
+        0.0,
+        0.228,
+        0.079
+      ],
+      "elapsed_time": 3745784,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lippizan_s_000005.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5822641602859,
+      "end_time": 5822645346236,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.02,
+        0.0,
+        0.257,
+        0.0,
+        0.722,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743377,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fighter_aircraft_s_001361.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5823976777917,
+      "end_time": 5823980522058,
+      "results": [
+        0.992,
+        0.0,
+        0.003,
+        0.0,
+        0.005,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744141,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "shooting_brake_s_000841.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5825290735105,
+      "end_time": 5825294478632,
+      "results": [
+        0.0,
+        0.913,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.087
+      ],
+      "elapsed_time": 3743527,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lapdog_s_000619.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5826635843357,
+      "end_time": 5826639589545,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.421,
+        0.017,
+        0.56,
+        0.0,
+        0.002,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746188,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tomcat_s_001536.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5827983339028,
+      "end_time": 5827987084472,
+      "results": [
+        0.0,
+        0.0,
+        0.004,
+        0.952,
+        0.001,
+        0.041,
+        0.003,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745444,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "moose_s_001207.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5829334333000,
+      "end_time": 5829338080162,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.65,
+        0.089,
+        0.213,
+        0.006,
+        0.04,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747162,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lipizzan_s_000018.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5830672069466,
+      "end_time": 5830675815188,
+      "results": [
+        0.0,
+        0.004,
+        0.0,
+        0.002,
+        0.0,
+        0.046,
+        0.0,
+        0.776,
+        0.021,
+        0.151
+      ],
+      "elapsed_time": 3745722,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pekinese_s_002105.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5832007512612,
+      "end_time": 5832011259045,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.005,
+        0.047,
+        0.948,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746433,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "american_elk_s_000126.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5833343840188,
+      "end_time": 5833347582903,
+      "results": [
+        0.0,
+        0.0,
+        0.002,
+        0.001,
+        0.971,
+        0.0,
+        0.0,
+        0.026,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742715,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bufo_bufo_s_000866.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5834704645996,
+      "end_time": 5834708387111,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3741115,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cow_pony_s_001233.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5836045464605,
+      "end_time": 5836049208285,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743680,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "puppy_s_001496.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5837397011424,
+      "end_time": 5837400753765,
+      "results": [
+        0.0,
+        0.0,
+        0.061,
+        0.223,
+        0.007,
+        0.695,
+        0.013,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742341,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "car_s_000026.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5838739524515,
+      "end_time": 5838743270115,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745600,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "stealth_fighter_s_000138.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5840078587562,
+      "end_time": 5840082328613,
+      "results": [
+        0.691,
+        0.0,
+        0.28,
+        0.007,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.021,
+        0.0
+      ],
+      "elapsed_time": 3741051,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "cat_s_000839.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5841432018407,
+      "end_time": 5841435762373,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.984,
+        0.005,
+        0.01,
+        0.001,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743966,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "lorry_s_000755.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5842789845798,
+      "end_time": 5842793595953,
+      "results": [
+        0.0,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999
+      ],
+      "elapsed_time": 3750155,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "canis_familiaris_s_000642.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5844136247251,
+      "end_time": 5844139998552,
+      "results": [
+        0.001,
+        0.0,
+        0.0,
+        0.805,
+        0.002,
+        0.064,
+        0.0,
+        0.128,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3751301,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pleasure_boat_s_000131.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5845476520322,
+      "end_time": 5845480266304,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3745982,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tank_ship_s_000912.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5846823241388,
+      "end_time": 5846826988797,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3747409,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "rangifer_caribou_s_000175.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5848154077221,
+      "end_time": 5848157822340,
+      "results": [
+        0.37,
+        0.0,
+        0.174,
+        0.001,
+        0.43,
+        0.0,
+        0.0,
+        0.001,
+        0.019,
+        0.003
+      ],
+      "elapsed_time": 3745119,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "convertible_s_001561.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5849505404848,
+      "end_time": 5849509148249,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743401,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "english_toy_spaniel_s_000590.bin",
+    "classes": "10",
+    "class": "5",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5850831177586,
+      "end_time": 5850834922356,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.265,
+        0.0,
+        0.734,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744770,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "arabian_s_000443.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5852175818060,
+      "end_time": 5852179562256,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744196,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "spadefoot_s_000290.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5853511350676,
+      "end_time": 5853515092515,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.001,
+        0.0,
+        0.0,
+        0.997,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3741839,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "jetliner_s_000162.bin",
+    "classes": "10",
+    "class": "0",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5854854710466,
+      "end_time": 5854858451240,
+      "results": [
+        0.006,
+        0.674,
+        0.01,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.294,
+        0.016
+      ],
+      "elapsed_time": 3740774,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "bufo_viridis_s_001212.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5856200555262,
+      "end_time": 5856204296104,
+      "results": [
+        0.0,
+        0.001,
+        0.004,
+        0.013,
+        0.107,
+        0.001,
+        0.868,
+        0.005,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3740842,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "ship_s_001663.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5857556298291,
+      "end_time": 5857560042618,
+      "results": [
+        0.082,
+        0.001,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.915,
+        0.001
+      ],
+      "elapsed_time": 3744327,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "saddle_horse_s_001679.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5858896776860,
+      "end_time": 5858900524051,
+      "results": [
+        0.001,
+        0.0,
+        0.007,
+        0.004,
+        0.01,
+        0.004,
+        0.002,
+        0.973,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3747191,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "true_cat_s_000915.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5860228506602,
+      "end_time": 5860232249295,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.996,
+        0.0,
+        0.0,
+        0.001,
+        0.001,
+        0.0,
+        0.001
+      ],
+      "elapsed_time": 3742693,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "domestic_cat_s_000055.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5861549516839,
+      "end_time": 5861553261095,
+      "results": [
+        0.0,
+        0.0,
+        0.001,
+        0.994,
+        0.0,
+        0.004,
+        0.0,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744256,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tabby_s_001166.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5862890477300,
+      "end_time": 5862894219707,
+      "results": [
+        0.006,
+        0.0,
+        0.0,
+        0.986,
+        0.0,
+        0.002,
+        0.0,
+        0.0,
+        0.0,
+        0.005
+      ],
+      "elapsed_time": 3742407,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "felis_catus_s_000018.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5864229848239,
+      "end_time": 5864233589284,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.981,
+        0.005,
+        0.003,
+        0.0,
+        0.011,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3741045,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "shooting_brake_s_000220.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5865581782915,
+      "end_time": 5865585525601,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742686,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "speedboat_s_001945.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5866929397207,
+      "end_time": 5866933141784,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3744577,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "toad_s_001102.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5868286223229,
+      "end_time": 5868289966120,
+      "results": [
+        0.002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.997,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3742891,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wagtail_s_001938.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5869621893323,
+      "end_time": 5869625638907,
+      "results": [
+        0.06,
+        0.0,
+        0.94,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745584,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "emu_s_000057.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5870958876683,
+      "end_time": 5870962624880,
+      "results": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3748197,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "fallow_deer_s_001050.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5872296782521,
+      "end_time": 5872300527174,
+      "results": [
+        0.023,
+        0.002,
+        0.098,
+        0.07,
+        0.527,
+        0.0,
+        0.061,
+        0.215,
+        0.002,
+        0.001
+      ],
+      "elapsed_time": 3744653,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "prunella_modularis_s_000006.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5873647760199,
+      "end_time": 5873651505226,
+      "results": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745027,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "nandu_s_001936.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5874994451603,
+      "end_time": 5874998194876,
+      "results": [
+        0.0,
+        0.0,
+        0.546,
+        0.077,
+        0.0,
+        0.046,
+        0.0,
+        0.33,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3743273,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "ostrich_s_001177.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5876339905073,
+      "end_time": 5876343649374,
+      "results": [
+        0.0,
+        0.0,
+        0.011,
+        0.0,
+        0.984,
+        0.002,
+        0.0,
+        0.003,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744301,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "felis_domesticus_s_000682.bin",
+    "classes": "10",
+    "class": "3",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5877656729779,
+      "end_time": 5877660476544,
+      "results": [
+        0.005,
+        0.0,
+        0.0,
+        0.986,
+        0.001,
+        0.003,
+        0.005,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746765,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "american_elk_s_000045.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5878990712076,
+      "end_time": 5878994458776,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746700,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "leopard_frog_s_000567.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5880347975851,
+      "end_time": 5880351724960,
+      "results": [
+        0.0,
+        0.0,
+        0.041,
+        0.0,
+        0.0,
+        0.0,
+        0.958,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3749109,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "garbage_truck_s_001000.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5881682967677,
+      "end_time": 5881686714115,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "elapsed_time": 3746438,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "broodmare_s_000497.bin",
+    "classes": "10",
+    "class": "7",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5883040412854,
+      "end_time": 5883044172181,
+      "results": [
+        0.0,
+        0.0,
+        0.292,
+        0.003,
+        0.001,
+        0.001,
+        0.006,
+        0.697,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3759327,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "guard_boat_s_000976.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5884387018492,
+      "end_time": 5884390763831,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3745339,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "elk_s_000296.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5885740241065,
+      "end_time": 5885743986482,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3745417,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "sparrow_s_000417.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5887078384897,
+      "end_time": 5887082125280,
+      "results": [
+        0.0,
+        0.0,
+        0.995,
+        0.001,
+        0.0,
+        0.002,
+        0.0,
+        0.001,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3740383,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "tipper_truck_s_000230.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5888415906618,
+      "end_time": 5888419652863,
+      "results": [
+        0.0,
+        0.079,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.921
+      ],
+      "elapsed_time": 3746245,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "mule_deer_s_000821.bin",
+    "classes": "10",
+    "class": "4",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5889760820900,
+      "end_time": 5889764565171,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744271,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "wagon_s_001295.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5891087978638,
+      "end_time": 5891091725313,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746675,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "pilot_boat_s_000430.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5892400807750,
+      "end_time": 5892404555388,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "elapsed_time": 3747638,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "nandu_s_001279.bin",
+    "classes": "10",
+    "class": "2",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5893728645447,
+      "end_time": 5893732391227,
+      "results": [
+        0.244,
+        0.056,
+        0.691,
+        0.001,
+        0.001,
+        0.001,
+        0.002,
+        0.001,
+        0.004,
+        0.0
+      ],
+      "elapsed_time": 3745780,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "coupe_s_000299.bin",
+    "classes": "10",
+    "class": "1",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5895060505098,
+      "end_time": 5895064249734,
+      "results": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3744636,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "gunboat_s_000431.bin",
+    "classes": "10",
+    "class": "8",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5896421635304,
+      "end_time": 5896425375724,
+      "results": [
+        0.02,
+        0.001,
+        0.001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.951,
+        0.026
+      ],
+      "elapsed_time": 3740420,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "alytes_obstetricans_s_000125.bin",
+    "classes": "10",
+    "class": "6",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5897754663017,
+      "end_time": 5897758409125,
+      "results": [
+        0.0,
+        0.0,
+        0.022,
+        0.004,
+        0.003,
+        0.0,
+        0.971,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "elapsed_time": 3746108,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  },
+  {
+    "file": "truck_s_001161.bin",
+    "classes": "10",
+    "class": "9",
+    "bytes_to_send": null,
+    "stride": null,
+    "total_length": null,
+    "infer": {
+      "start_time": 5899095227121,
+      "end_time": 5899098971794,
+      "results": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.999
+      ],
+      "elapsed_time": 3744673,
+      "total_inferences": 1,
+      "iterations": 1,
+      "warmups": 0
+    }
+  }
+]
