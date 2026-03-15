@@ -176,6 +176,12 @@ void th_load_tensor() {
     }
   } else if (desc.datatype == nncase::typecode_t::dt_uint8) {
     memcpy(in_span.data(), input_quantized, kIcInputSize);
+  } else if (desc.datatype == nncase::typecode_t::dt_float32) {
+    // Convert uint8 [0,255] -> float32 [0.0, 1.0]
+    float* dst = reinterpret_cast<float*>(in_span.data());
+    for (int i = 0; i < kIcInputSize; i++) {
+      dst[i] = static_cast<float>(input_quantized[i]) / 255.0f;
+    }
   } else {
     th_printf("WARNING: unsupported input dtype, copying raw bytes\n");
     memcpy(in_span.data(), input_quantized,
