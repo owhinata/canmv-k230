@@ -1,3 +1,6 @@
 [submodule "k230_sdk"]
 	path = k230_sdk
 	url = https://github.com/kendryte/k230_sdk.git
+[submodule "mlperf_tiny"]
+	path = mlperf_tiny
+	url = https://github.com/mlcommons/tiny.git

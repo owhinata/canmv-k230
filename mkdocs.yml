@@ -64,6 +64,7 @@ nav:
   - AI開発:
       - ai/face_detect.md
       - ai/veg_classify.md
+      - ai/mlperf_tiny.md
   - 技術情報:
       - technical/usb_cdc_ether.md
       - technical/bigcore_rtsmart_mpp.md

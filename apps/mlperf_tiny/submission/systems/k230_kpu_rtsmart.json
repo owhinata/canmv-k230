@@ -1,0 +1,12 @@
+{
+  "system_name": "K230 KPU RT-Smart",
+  "submitter": "local-benchmark",
+  "division": "open",
+  "framework": "nncase",
+  "operating_system": "RT-Smart",
+  "accelerator": "Kendryte KPU",
+  "accelerator_frequency": "TBD",
+  "cpu": "RISC-V C908",
+  "cpu_frequency": "TBD",
+  "notes": "local evaluation only"
+}
