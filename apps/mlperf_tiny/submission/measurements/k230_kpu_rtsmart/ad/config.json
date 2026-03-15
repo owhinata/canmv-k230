@@ -1,0 +1,10 @@
+{
+  "benchmark": "anomaly_detection",
+  "dataset": "toycar",
+  "model": "autoencoder",
+  "input_size": [640],
+  "runtime": "nncase",
+  "device": "K230",
+  "timestamp_source": "rdcycle",
+  "uart_baudrate": 115200
+}

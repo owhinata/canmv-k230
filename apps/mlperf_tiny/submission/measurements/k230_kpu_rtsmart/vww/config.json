@@ -1,0 +1,10 @@
+{
+  "benchmark": "visual_wake_words",
+  "dataset": "vww",
+  "model": "mobilenetv1",
+  "input_size": [96, 96, 3],
+  "runtime": "nncase",
+  "device": "K230",
+  "timestamp_source": "rdcycle",
+  "uart_baudrate": 115200
+}

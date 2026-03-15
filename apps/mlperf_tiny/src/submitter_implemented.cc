@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0.
 //
 // K230/nncase implementation of th_* functions for MLPerf Tiny.
-// Benchmark: Image Classification (CIFAR-10, ResNet-8, int8).
+// Supports all benchmarks: IC, VWW, KWS, AD via runtime tensor info.
 
 #include "api/submitter_implemented.h"
 
@@ -21,18 +21,10 @@
 #include "api/internally_implemented.h"
 
 // ---------------------------------------------------------------------------
-// Constants
-// ---------------------------------------------------------------------------
-
-// CIFAR-10 ResNet-8: 32x32x3 = 3072
-static constexpr int kIcInputSize = 32 * 32 * 3;
-static constexpr int kCategoryCount = 10;
-
-// ---------------------------------------------------------------------------
 // Global state
 // ---------------------------------------------------------------------------
 
-const char* g_kmodel_path = nullptr;
+const char* kmodel_path_ = nullptr;
 
 namespace {
 
@@ -40,29 +32,32 @@ using namespace nncase::runtime;  // NOLINT(build/namespaces)
 
 interpreter interp;
 
-// Raw output buffer — read from output tensor
-float output_float[kCategoryCount];
+// Element counts — determined at runtime from kmodel tensor descriptors
+static int input_elements_ = 0;
+static int output_elements_ = 0;
+
+// Raw output buffer — sized to MAX_DB_INPUT_SIZE to cover all benchmarks
+// (largest input is VWW: 96*96*3 = 27648 = MAX_DB_INPUT_SIZE)
+float output_float[MAX_DB_INPUT_SIZE];
 
 // ---------------------------------------------------------------------------
 // Internal helpers — platform / model / tensor lifecycle
 // ---------------------------------------------------------------------------
 
-// InitPlatform: VB initialization if required by nncase KPU runtime.
-// Start without VB; add minimal config here if kmodel load fails.
 void InitPlatform() {
   // Intentionally empty — VB not required for initial bring-up.
   // If nncase requires VB pools, add kd_mpi_vb_set_config() here.
 }
 
 void LoadKmodel() {
-  if (g_kmodel_path == nullptr) {
+  if (kmodel_path_ == nullptr) {
     printf("ERROR: kmodel path not set\n");
     return;
   }
 
-  std::ifstream ifs(g_kmodel_path, std::ios::binary);
+  std::ifstream ifs(kmodel_path_, std::ios::binary);
   if (!ifs) {
-    printf("ERROR: cannot open kmodel: %s\n", g_kmodel_path);
+    printf("ERROR: cannot open kmodel: %s\n", kmodel_path_);
     return;
   }
 
@@ -70,6 +65,23 @@ void LoadKmodel() {
 }
 
 void PrepareTensors() {
+  // Compute input element count from shape
+  input_elements_ = 1;
+  auto in_shape = interp.input_shape(0);
+  for (size_t d = 0; d < in_shape.size(); d++) {
+    input_elements_ *= static_cast<int>(in_shape[d]);
+  }
+
+  // Compute output element count from shape
+  output_elements_ = 1;
+  auto out_shape = interp.output_shape(0);
+  for (size_t d = 0; d < out_shape.size(); d++) {
+    output_elements_ *= static_cast<int>(out_shape[d]);
+  }
+
+  printf("Model: input_elements=%d, output_elements=%d\n",
+         input_elements_, output_elements_);
+
   for (size_t i = 0; i < interp.inputs_size(); i++) {
     auto desc = interp.input_desc(i);
     auto shape = interp.input_shape(i);
@@ -96,31 +108,28 @@ void ReadOutputTensorRaw() {
   auto desc = interp.output_desc(0);
 
   if (desc.datatype == nncase::typecode_t::dt_int8) {
-    // int8 output — dequantize with identity transform (scale=1, zp=0).
-    // Actual quant params are baked into the kmodel; this gives raw logits.
     const int8_t* data = reinterpret_cast<const int8_t*>(out_span.data());
-    for (int i = 0; i < kCategoryCount; i++) {
+    for (int i = 0; i < output_elements_; i++) {
       output_float[i] = static_cast<float>(data[i]);
     }
   } else if (desc.datatype == nncase::typecode_t::dt_float32) {
     const float* data = reinterpret_cast<const float*>(out_span.data());
-    for (int i = 0; i < kCategoryCount; i++) {
+    for (int i = 0; i < output_elements_; i++) {
       output_float[i] = data[i];
     }
   } else {
     printf("WARNING: unsupported output dtype\n");
-    for (int i = 0; i < kCategoryCount; i++) {
+    for (int i = 0; i < output_elements_; i++) {
       output_float[i] = 0.0f;
     }
   }
 }
 
-// Format results matching v1.1 reference_submissions/image_classification
 void FormatResultsForRunner() {
   th_printf("m-results-[");
-  for (int i = 0; i < kCategoryCount; i++) {
+  for (int i = 0; i < output_elements_; i++) {
     th_printf("%0.3f", static_cast<double>(output_float[i]));
-    if (i < kCategoryCount - 1) {
+    if (i < output_elements_ - 1) {
       th_printf(",");
     }
   }
@@ -128,7 +137,7 @@ void FormatResultsForRunner() {
 }
 
 // ---------------------------------------------------------------------------
-// Transport layer — isolated for future runner replacement
+// Transport layer
 // ---------------------------------------------------------------------------
 
 void TransportWriteFmt(const char* fmt, va_list ap) {
@@ -145,47 +154,53 @@ int TransportReadChar() { return getchar(); }
 // ===========================================================================
 
 void th_load_tensor() {
-  uint8_t input_quantized[kIcInputSize];
-
-  size_t bytes = ee_get_buffer(input_quantized, kIcInputSize * sizeof(uint8_t));
-  if (bytes / sizeof(uint8_t) != kIcInputSize) {
-    th_printf("Input db has %d elements, expected %d\n",
-              static_cast<int>(bytes / sizeof(uint8_t)), kIcInputSize);
-    return;
-  }
-
-  // Get input tensor and copy data
+  // Get input tensor info
   auto in_tensor = interp.input_tensor(0).expect("cannot get input tensor");
   auto in_map =
       std::move(nncase::runtime::hrt::map(in_tensor,
                                            nncase::runtime::map_write)
                     .unwrap_or_throw());
   auto in_span = in_map.buffer();
-
   auto desc = interp.input_desc(0);
 
-  if (desc.datatype == nncase::typecode_t::dt_int8) {
-    // Convert uint8 [0,255] -> int8 [-128,127]
-    int8_t* dst = reinterpret_cast<int8_t*>(in_span.data());
-    for (int i = 0; i < kIcInputSize; i++) {
-      if (input_quantized[i] <= 127) {
-        dst[i] = static_cast<int8_t>(input_quantized[i]) - 128;
-      } else {
-        dst[i] = static_cast<int8_t>(input_quantized[i] - 128);
+  // Read from db buffer — request up to float32 size to auto-detect format.
+  // If db has input_elements_*4 bytes → raw float32 (AD benchmark).
+  // If db has input_elements_   bytes → uint8 data (IC/VWW/KWS).
+  uint8_t input_buf[MAX_DB_INPUT_SIZE];
+  size_t float_size = input_elements_ * sizeof(float);
+  size_t uint8_size = input_elements_ * sizeof(uint8_t);
+  size_t bytes = ee_get_buffer(
+      input_buf, float_size < MAX_DB_INPUT_SIZE ? float_size : uint8_size);
+
+  if (bytes == float_size && float_size != uint8_size) {
+    // Raw float32 bytes (e.g. AD: 640 elements × 4 = 2560 bytes)
+    memcpy(in_span.data(), input_buf, float_size);
+  } else if (bytes == uint8_size) {
+    // uint8 data (IC/VWW/KWS)
+    if (desc.datatype == nncase::typecode_t::dt_int8) {
+      int8_t* dst = reinterpret_cast<int8_t*>(in_span.data());
+      for (int i = 0; i < input_elements_; i++) {
+        if (input_buf[i] <= 127) {
+          dst[i] = static_cast<int8_t>(input_buf[i]) - 128;
+        } else {
+          dst[i] = static_cast<int8_t>(input_buf[i] - 128);
+        }
       }
-    }
-  } else if (desc.datatype == nncase::typecode_t::dt_uint8) {
-    memcpy(in_span.data(), input_quantized, kIcInputSize);
-  } else if (desc.datatype == nncase::typecode_t::dt_float32) {
-    // Cast uint8 -> float32 (reference model expects raw values)
-    float* dst = reinterpret_cast<float*>(in_span.data());
-    for (int i = 0; i < kIcInputSize; i++) {
-      dst[i] = static_cast<float>(input_quantized[i]);
+    } else if (desc.datatype == nncase::typecode_t::dt_uint8) {
+      memcpy(in_span.data(), input_buf, uint8_size);
+    } else if (desc.datatype == nncase::typecode_t::dt_float32) {
+      // Cast uint8 [0,255] -> float32 (nncase handles internal quantization)
+      float* dst = reinterpret_cast<float*>(in_span.data());
+      for (int i = 0; i < input_elements_; i++) {
+        dst[i] = static_cast<float>(input_buf[i]);
+      }
+    } else {
+      memcpy(in_span.data(), input_buf, uint8_size);
     }
   } else {
-    th_printf("WARNING: unsupported input dtype, copying raw bytes\n");
-    memcpy(in_span.data(), input_quantized,
-           kIcInputSize < in_span.size() ? kIcInputSize : in_span.size());
+    th_printf("Input db has %d bytes, expected %d or %d\n",
+              static_cast<int>(bytes), static_cast<int>(uint8_size),
+              static_cast<int>(float_size));
   }
 }
 
@@ -216,7 +231,6 @@ char th_getchar() { return static_cast<char>(TransportReadChar()); }
 // --- optional API ---
 
 void th_serialport_initialize(void) {
-  // Disable stdin buffering for character-at-a-time reads
   setvbuf(stdin, nullptr, _IONBF, 0);
   setvbuf(stdout, nullptr, _IONBF, 0);
 }
@@ -235,11 +249,11 @@ void th_final_initialize(void) {
 void th_pre() {}
 void th_post() {}
 
-extern volatile sig_atomic_t g_dut_running;
+extern volatile sig_atomic_t dut_running_;
 
 void th_command_ready(char volatile* p_command) {
   if (strncmp(const_cast<char*>(p_command), "exit", 4) == 0) {
-    g_dut_running = 0;
+    dut_running_ = 0;
     return;
   }
   ee_serial_command_parser_callback(const_cast<char*>(p_command));
