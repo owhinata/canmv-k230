@@ -127,6 +127,10 @@ def run_benchmark(args):
     if not prepare_dataset():
         return 1
 
+    # Runner's script.py creates sessions/ in cwd on import.
+    os.makedirs(args.output_dir, exist_ok=True)
+    os.chdir(args.output_dir)
+
     # Add runner and scripts dirs to path
     sys.path.insert(0, RUNNER_DIR)
     sys.path.insert(0, SCRIPT_DIR)
@@ -230,6 +234,11 @@ def main():
     parser.add_argument(
         "--echo", action="store_true",
         help="Echo serial communication for debugging",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=".",
+        help="Working directory for runner output (sessions/, etc.)",
     )
     args = parser.parse_args()
 

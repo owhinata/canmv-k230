@@ -73,12 +73,13 @@ mlperf_tiny: ELF 64-bit LSB executable, UCB RISC-V, ...
 
 ### deploy ターゲット
 
-kmodel ファイルのパスを指定してデプロイします:
+kmodel 変換・ビルド・転送をまとめて実行します:
 
 ```bash
-cmake build/mlperf_tiny -DMLPERF_KMODEL=/path/to/model.kmodel
 cmake --build build/mlperf_tiny --target deploy
 ```
+
+deploy は kmodel ターゲット（`convert_kmodel.py` による TFLite → kmodel 変換）に依存しているため、kmodel が未生成の場合は自動的に変換されます。
 
 ### 手動で転送する場合
 
@@ -140,7 +141,7 @@ python main.py --port /dev/ttyACM1 --baud 115200
 | 変数 | デフォルト | 説明 |
 |------|-----------|------|
 | `MLPERF_BENCHMARK` | `ic` | ベンチマーク種別 |
-| `MLPERF_KMODEL` | (空) | デプロイする kmodel ファイルのパス |
+| `MLPERF_KMODEL` | `build/.../model.kmodel` | デプロイする kmodel のパス（kmodel ターゲットで自動生成） |
 
 ## ソースファイル
 

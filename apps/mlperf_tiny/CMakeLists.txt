@@ -11,8 +11,23 @@ set(MLPERF_API_DIR ${MLPERF_TINY_DIR}/benchmark/api)
 # Benchmark selection (future: vww, kws, ad)
 set(MLPERF_BENCHMARK "ic" CACHE STRING "Benchmark: ic")
 
-# kmodel file for deploy target
-set(MLPERF_KMODEL "" CACHE FILEPATH "Path to .kmodel file for deployment")
+# kmodel conversion target
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+set(_VENV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../.venv)
+set(_VENV_PYTHON ${_VENV_DIR}/bin/python)
+set(_KMODEL_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/model.kmodel)
+
+add_custom_target(kmodel
+    COMMAND ${_VENV_PYTHON}
+            ${CMAKE_CURRENT_SOURCE_DIR}/scripts/convert_kmodel.py
+            -o ${_KMODEL_OUTPUT}
+    USES_TERMINAL
+    COMMENT "Converting TFLite -> kmodel (${_KMODEL_OUTPUT})"
+)
+
+# Allow override; default to build dir output from kmodel target
+set(MLPERF_KMODEL "${_KMODEL_OUTPUT}" CACHE FILEPATH
+    "Path to .kmodel file for deployment")
 
 add_executable(mlperf_tiny
     src/main.cc
@@ -91,7 +106,7 @@ endif()
 
 k230_add_deploy_target(
     DEPLOY_DIR ${_DEPLOY_DIR}
-    DEPENDS mlperf_tiny
+    DEPENDS mlperf_tiny kmodel
     FILES ${_DEPLOY_FILES}
 )
 k230_add_run_target(
