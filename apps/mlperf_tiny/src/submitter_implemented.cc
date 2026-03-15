@@ -6,6 +6,8 @@
 
 #include "api/submitter_implemented.h"
 
+#include <signal.h>
+
 #include <cstdarg>
 #include <cstdint>
 #include <cstdio>
@@ -227,7 +229,13 @@ void th_final_initialize(void) {
 void th_pre() {}
 void th_post() {}
 
+extern volatile sig_atomic_t g_dut_running;
+
 void th_command_ready(char volatile* p_command) {
+  if (strncmp(const_cast<char*>(p_command), "exit", 4) == 0) {
+    g_dut_running = 0;
+    return;
+  }
   ee_serial_command_parser_callback(const_cast<char*>(p_command));
 }
 
